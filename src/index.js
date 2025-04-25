@@ -45,7 +45,9 @@ eraWidget.init({
 const widget = document.querySelector(".light-icon");
 const icon = document.querySelector(".light-icon");
 const status = document.querySelector(".status");
-const bedLightSwitch = document.querySelector("#bed-light-switch");
+
+
+const LightSwitch = document.querySelector("#light-switch");
 status.addEventListener("click", () => {
   StatusLight = !StatusLight;
   if (StatusLight) {
@@ -55,24 +57,35 @@ status.addEventListener("click", () => {
   }
 });
 
-bedLightSwitch.addEventListener("change", () => {
-  console.log(bedLightSwitch.checked);
+LightSwitch.addEventListener("change", () => {
+  console.log(LightSwitch.checked);
 });
 
 if (StatusLight) {
   icon.classList.add("active");
-  bedLightSwitch.checked = true;
+  LightSwitch.checked = true;
 } else {
   icon.classList.remove("active");
-  bedLightSwitch.checked = false;
+  LightSwitch.checked = false;
 }
 
-// Test auto mode
-// const check = document.querySelector("#check");
-// check.addEventListener("click", () => {
-//   StatusLight = !StatusLight;
-//   console.log("Status light changed to: ", StatusLight);
-// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 let isAuto = false;
 const autoBtn = document.querySelector("#auto-btn");
@@ -88,10 +101,10 @@ function requestAutoUpdate() {
   if (isAuto) {
     if (StatusLight) {
       icon.classList.add("active");
-      bedLightSwitch.checked = true;
+      LightSwitch.checked = true;
     } else {
       icon.classList.remove("active");
-      bedLightSwitch.checked = false;
+      LightSwitch.checked = false;
     }
     setTimeout(() => requestAutoUpdate());
   }

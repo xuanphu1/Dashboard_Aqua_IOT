@@ -9,7 +9,7 @@
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="assets/style.css" rel="stylesheet"/>
+  <link href="assets/style.css" rel="stylesheet" />
 </head>
 
 
@@ -19,7 +19,6 @@
       <div class="nav">
         <div>
           <a class="active" href="#"> HOME </a>
-          <a href=""> STREAM </a>
           <div id="weather-container">
           </div>
         </div>
@@ -40,82 +39,109 @@
           </div>
         </div>
       </div>
+
+
+
+
+
       <div class="widgets">
-        <!-- Widget Bed Light -->
-        <div class="widget bedLight-widget">
-          <div class="title">Bed Light</div>
-          <div class="content-wrapper">
-            <div class="light-icon" id="bedLightIcon">
-              <!-- <img src="assets/imgs/tableLamp.png" alt="imgBedLights" style="margin-top: 30px;" /> -->
-            </div>
+
+        <div class="widget Light-widget">
+
+          <div class="title">Light</div>
+          <div class="light-icon" id="bedLightIcon">
+            <img src="assets/imgs/3dKitchenLight.png" alt="imgBedLights" style="margin-top: 30px;" />
           </div>
+
+
+
           <div id="switch">
-            <input type="checkbox" id="bed-light-switch" value="bed-light-on" />
-            <label for="bed-light-switch" class="status" style="margin-top: 80px;">
+            <input type="checkbox" id="light-switch" value="light-on" />
+            <label for="light-switch" class="status" style="margin-top: 80px;">
             </label>
             <div class="s" style="margin-top: 80px;"></div>
           </div>
         </div>
 
-        <!-- Widget Kitchen Light -->
-        <div class="widget apple-style">
-          <div class="widget-header">
-            <div class="icon">
-              <img src="assets/imgs/3dKitchenLight.png" alt="icon" />
-            </div>
-            <div class="widget-info">
-              <div class="widget-title">Kitchen Lights</div>
-            </div>
+
+
+        <div class="widget Fan-widget">
+
+
+          <div class="widget-title">Fan</div>
+          <div class="icon">
+            <img src="assets/imgs/istockphoto-170640706-612x612-removebg-preview.png" alt="icon" />
           </div>
+
+              
           <div id="switch">
-            <input type="checkbox" id="kitchen-light-switch" />
-            <label for="kitchen-light-switch" class="status" style="margin-top: 266px;"></label>
+            <input type="checkbox" id="fan-switch" />
+            <label for="fan-switch" class="status" style="margin-top: 266px;"></label>
             <div class="s" style="margin-top: 266px;"></div>
           </div>
         </div>
 
-        <!-- Widget Living Room Light -->
-        <div class="widget livingRoom-widget" style="padding: 19px;">
-          <div class="widget-header">
-            <div class="icon">
-              <img src="assets/imgs/FloorLamp.png" alt="icon" />
-            </div>
-            <div class="widget-info">
-              <div class="widget-title">Living Room Lights</div>
-            </div>
+
+
+        <div class="widget Heater-widget" style="padding: 19px;">
+
+
+          <div class="widget-title">Heater</div>
+          <div class="icon">
+            <img src="assets/imgs/heater-3d-model-obj-fbx-ma-removebg-preview.png" alt="icon" />
           </div>
+
+            
           <div id="switch">
-            <input type="checkbox" id="living-room-switch" />
-            <label for="living-room-switch" class="status" style="margin-top: 266px;"></label>
+            <input type="checkbox" id="heater-switch" />
+            <label for="heater-switch" class="status" style="margin-top: 266px;"></label>
             <div class="s" style="margin-top: 266px;"></div>
           </div>
         </div>
 
-        <!-- Widget Humidity Light -->
-        <div class="widget humidifier-widget">
-          <div class="title">Humidity</div>
+
+
+        <div class="widget Pumb-widget">
+
+          <div class="title">Pumb</div>
+          <div class="icon">
+            <img src="assets/imgs/tceb71rc-removebg-preview.png" alt="icon" />
+          </div>
+
           <div id="switch">
-            <input type="checkbox" id="humidity-switch" />
-            <label for="humidity-switch" class="status" style="margin-top: 301px;"></label>
+            <input type="checkbox" id="pumb-switch" />
+            <label for="pumb-switch" class="status" style="margin-top: 301px;"></label>
             <div class="s" style="margin-top: 301px;"></div>
           </div>
         </div>
 
-        <!-- Widget Temp Light -->
-        <div class="widget temp-widget">
-          <div class="title">Temperature</div>
+
+
+        <div class="widget Filter-widget">
+
+          <div class="title">Filter</div>
+          <div class="icon">
+            <img src="assets/imgs/pngtree-3d-water-filter-images-png-image_13286731-removebg-preview.png" alt="icon" />
+          </div>
+
           <div id="switch">
-            <input type="checkbox" id="temp-switch" />
-            <label for="temp-switch" class="status" style="margin-top: 301px;"></label>
+            <input type="checkbox" id="filter-switch" />
+            <label for="filter-switch" class="status" style="margin-top: 301px;"></label>
             <div class="s" style="margin-top: 301px;"></div>
           </div>
         </div>
 
-        <div class="widget weather-widget">
-          <div class="title">Abc</div>
+        <div class="widget Feeder-widget">
+
+          <div class="title">Feeder</div>
+
+          <div class="icon">
+            <img src="assets/imgs/solar-cell-powered-directional-fish-feeder-centrifugal-sprea-02-removebg-preview.png" alt="icon" />
+          </div>
+
           <div id="switch">
-            <input type="checkbox" id="abc-switch" />
-            <label for="abc-switch" class="status" style="margin-top: 301px;"></label>
+            <input type="checkbox" id="feeder-switch" />
+            <label for="feeder-switch" class="status" style="margin-top: 301px;"></label>
             <div class="s" style="margin-top: 301px; left: 69px;"></div>
           </div>
         </div>
@@ -184,4 +210,5 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="src/index.js"></script>
+
 </html>
