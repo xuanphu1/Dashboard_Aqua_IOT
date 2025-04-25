@@ -19,8 +19,8 @@ let Fan_ON,
     LoadingOTA;
 
     let configStatusFan, configStatusHeater, configStatusLight, configStatusFeeder, configStatusPump, configStatusFilter, configStatusAuto, configStatusOTA;
-let StatusPump = 0, StatusLight = 1, StatusFan = 0, StatusFeeder = 0, StatusHeater = 0, StatusFilter = 0, StatusAuto = 0, StatusOTA = 0;
-let TemperatureValue = 5, WaterLevelValue = 0, TDSValue = 0, PHValue = 0, ConductivityValue = 0;
+let StatusPump, StatusLight, StatusFan, StatusFeeder, StatusHeater, StatusFilter, StatusAuto , StatusOTA ;
+let TemperatureValue, WaterLevelValue, TDSValue, PHValue, ConductivityValue;
 
 eraWidget.init({
   onConfiguration: (configuration) => {
@@ -51,7 +51,7 @@ eraWidget.init({
     Pumb_ON = configuration.actions[8];
     Pumb_OFF = configuration.actions[9];
     Filter_ON = configuration.actions[10];
-    Filter_ON = configuration.actions[11];
+    Filter_OFF = configuration.actions[11];
     SetAutoON = configuration.actions[12];
     SetAutoOFF = configuration.actions[13];
     RequestOTA = configuration.actions[14];
@@ -93,11 +93,23 @@ status.addEventListener("click", () => {
     icon.classList.add("active");
     eraWidget.triggerAction(Light_ON.action,null);
     eraWidget.triggerAction(SetAutoON.action,null);
+    eraWidget.triggerAction(Filter_ON.action,null);
+    eraWidget.triggerAction(Pumb_ON.action,null);
+    eraWidget.triggerAction(Fan_ON.action,null);
+    eraWidget.triggerAction(Heater_ON.action,null);
+    eraWidget.triggerAction(Feeder_ON.action,null);
+    eraWidget.triggerAction(RequestOTA.action,null);
+
   } else {
     icon.classList.remove("active");
     eraWidget.triggerAction(Light_OFF.action,null);
     eraWidget.triggerAction(SetAutoOFF.action,null);
     eraWidget.triggerAction(Filter_OFF.action,null);
+    eraWidget.triggerAction(Pumb_OFF.action,null);
+    eraWidget.triggerAction(Fan_OFF.action,null);
+    eraWidget.triggerAction(Heater_OFF.action,null);
+    eraWidget.triggerAction(Feeder_OFF.action,null);
+    eraWidget.triggerAction(LoadingOTA.action,null);
   }
 });
 
