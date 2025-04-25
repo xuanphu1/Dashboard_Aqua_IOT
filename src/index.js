@@ -20,7 +20,7 @@ let Fan_ON,
 
     let configStatusFan, configStatusHeater, configStatusLight, configStatusFeeder, configStatusPump, configStatusFilter, configStatusAuto, configStatusOTA;
 let StatusPump = 0, StatusLight = 1, StatusFan = 0, StatusFeeder = 0, StatusHeater = 0, StatusFilter = 0, StatusAuto = 0, StatusOTA = 0;
-let TemperatureValue = 50, WaterLevelValue = 2, TDSValue = 3, PHValue = 4, ConductivityValue = 5;
+let TemperatureValue = 5, WaterLevelValue = 0, TDSValue = 0, PHValue = 0, ConductivityValue = 0;
 
 eraWidget.init({
   onConfiguration: (configuration) => {
@@ -92,9 +92,12 @@ status.addEventListener("click", () => {
   if (StatusLight) {
     icon.classList.add("active");
     eraWidget.triggerAction(Light_ON.action,null);
+    eraWidget.triggerAction(SetAutoON.action,null);
   } else {
     icon.classList.remove("active");
     eraWidget.triggerAction(Light_OFF.action,null);
+    eraWidget.triggerAction(SetAutoOFF.action,null);
+    eraWidget.triggerAction(Filter_OFF.action,null);
   }
 });
 
