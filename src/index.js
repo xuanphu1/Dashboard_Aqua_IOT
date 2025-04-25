@@ -1,7 +1,24 @@
 // Get Data from Era Widget
 const eraWidget = new EraWidget();
 let configTemp, configWater, configTDS, configPH, configConductivity;
-let configStatusFan, configStatusHeater, configStatusLight, configStatusFeeder, configStatusPump, configStatusFilter, configStatusAuto, configStatusOTA;
+let Fan_ON, 
+    Fan_OFF, 
+    Heater_ON, 
+    Heater_OFF, 
+    Light_ON, 
+    Light_OFF, 
+    Feeder_ON, 
+    Feeder_OFF,
+    Pumb_ON, 
+    Pumb_OFF,
+    Filter_ON, 
+    Filter_OFF,
+    SetAutoON,
+    SetAutoOFF,
+    RequestOTA,
+    LoadingOTA;
+
+    let configStatusFan, configStatusHeater, configStatusLight, configStatusFeeder, configStatusPump, configStatusFilter, configStatusAuto, configStatusOTA;
 let StatusPump = 0, StatusLight = 1, StatusFan = 0, StatusFeeder = 0, StatusHeater = 0, StatusFilter = 0, StatusAuto = 0, StatusOTA = 0;
 let TemperatureValue = 50, WaterLevelValue = 2, TDSValue = 3, PHValue = 4, ConductivityValue = 5;
 
@@ -12,6 +29,7 @@ eraWidget.init({
     configPH = configuration.realtime_configs[2];
     configWater = configuration.realtime_configs[3];
     configConductivity = configuration.realtime_configs[4];
+
     configStatusFan = configuration.realtime_configs[5];
     configStatusHeater = configuration.realtime_configs[6];
     configStatusLight = configuration.realtime_configs[7];
@@ -20,6 +38,26 @@ eraWidget.init({
     configStatusFilter = configuration.realtime_configs[10];
     configStatusAuto = configuration.realtime_configs[11];
     configStatusOTA = configuration.realtime_configs[12];
+
+
+    Fan_ON = configuration.actions[0];
+    Fan_OFF = configuration.actions[1];
+    Heater_ON = configuration.actions[2];
+    Heater_OFF = configuration.actions[3];
+    Light_ON = configuration.actions[4];
+    Light_OFF = configuration.actions[5];
+    Feeder_ON = configuration.actions[6];
+    Feeder_OFF = configuration.actions[7];
+    Pumb_ON = configuration.actions[8];
+    Pumb_OFF = configuration.actions[9];
+    Filter_ON = configuration.actions[10];
+    Filter_ON = configuration.actions[11];
+    SetAutoON = configuration.actions[12];
+    SetAutoOFF = configuration.actions[13];
+    RequestOTA = configuration.actions[14];
+    LoadingOTA = configuration.actions[15];
+
+
   },
   onValues: (values) => {
     // Values
@@ -28,6 +66,7 @@ eraWidget.init({
     TDSValue = values[configTDS.id].value;
     PHValue = values[configPH.id].value;
     ConductivityValue = values[configConductivity.id].value;
+
     // Status
     StatusFan = values[configStatusFan.id].value;
     StatusHeater = values[configStatusHeater.id].value;
@@ -52,8 +91,10 @@ status.addEventListener("click", () => {
   StatusLight = !StatusLight;
   if (StatusLight) {
     icon.classList.add("active");
+    eraWidget.triggerAction(Light_ON.action,null);
   } else {
     icon.classList.remove("active");
+    eraWidget.triggerAction(Light_OFF.action,null);
   }
 });
 
