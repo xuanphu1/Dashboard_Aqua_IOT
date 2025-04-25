@@ -1,0 +1,187 @@
+<html>
+
+<head>
+  <script src="https://www.unpkg.com/@eohjsc/era-widget@1.1.3/src/index.js"></script>
+
+  <title>Smart Home Dashboard</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="assets/style.css" rel="stylesheet"/>
+</head>
+
+
+<body>
+  <div class="container">
+    <div class="main-content">
+      <div class="nav">
+        <div>
+          <a class="active" href="#"> HOME </a>
+          <a href=""> STREAM </a>
+          <div id="weather-container">
+          </div>
+        </div>
+        <div>
+          <div class="btn" style="margin-right: 20px; margin-left: 0px;">
+            <div>Auto mode:</div>
+            <input type="checkbox" id="auto-btn" />
+            <label for="auto-btn" style="width: 60px; height: 29px;">
+            </label>
+            <div class="s-auto" style="margin-left: 1100px"></div>
+          </div>
+          <div class="btn">
+            <div>FOTA:</div>
+            <input type="checkbox" id="fota-btn" />
+            <label for="fota-btn" style="width: 60px; height: 29px;">
+            </label>
+            <div class="s-auto" style="margin-left: 1233px"></div>
+          </div>
+        </div>
+      </div>
+      <div class="widgets">
+        <!-- Widget Bed Light -->
+        <div class="widget bedLight-widget">
+          <div class="title">Bed Light</div>
+          <div class="content-wrapper">
+            <div class="light-icon" id="bedLightIcon">
+              <!-- <img src="assets/imgs/tableLamp.png" alt="imgBedLights" style="margin-top: 30px;" /> -->
+            </div>
+          </div>
+          <div id="switch">
+            <input type="checkbox" id="bed-light-switch" value="bed-light-on" />
+            <label for="bed-light-switch" class="status" style="margin-top: 80px;">
+            </label>
+            <div class="s" style="margin-top: 80px;"></div>
+          </div>
+        </div>
+
+        <!-- Widget Kitchen Light -->
+        <div class="widget apple-style">
+          <div class="widget-header">
+            <div class="icon">
+              <img src="assets/imgs/3dKitchenLight.png" alt="icon" />
+            </div>
+            <div class="widget-info">
+              <div class="widget-title">Kitchen Lights</div>
+            </div>
+          </div>
+          <div id="switch">
+            <input type="checkbox" id="kitchen-light-switch" />
+            <label for="kitchen-light-switch" class="status" style="margin-top: 266px;"></label>
+            <div class="s" style="margin-top: 266px;"></div>
+          </div>
+        </div>
+
+        <!-- Widget Living Room Light -->
+        <div class="widget livingRoom-widget" style="padding: 19px;">
+          <div class="widget-header">
+            <div class="icon">
+              <img src="assets/imgs/FloorLamp.png" alt="icon" />
+            </div>
+            <div class="widget-info">
+              <div class="widget-title">Living Room Lights</div>
+            </div>
+          </div>
+          <div id="switch">
+            <input type="checkbox" id="living-room-switch" />
+            <label for="living-room-switch" class="status" style="margin-top: 266px;"></label>
+            <div class="s" style="margin-top: 266px;"></div>
+          </div>
+        </div>
+
+        <!-- Widget Humidity Light -->
+        <div class="widget humidifier-widget">
+          <div class="title">Humidity</div>
+          <div id="switch">
+            <input type="checkbox" id="humidity-switch" />
+            <label for="humidity-switch" class="status" style="margin-top: 301px;"></label>
+            <div class="s" style="margin-top: 301px;"></div>
+          </div>
+        </div>
+
+        <!-- Widget Temp Light -->
+        <div class="widget temp-widget">
+          <div class="title">Temperature</div>
+          <div id="switch">
+            <input type="checkbox" id="temp-switch" />
+            <label for="temp-switch" class="status" style="margin-top: 301px;"></label>
+            <div class="s" style="margin-top: 301px;"></div>
+          </div>
+        </div>
+
+        <div class="widget weather-widget">
+          <div class="title">Abc</div>
+          <div id="switch">
+            <input type="checkbox" id="abc-switch" />
+            <label for="abc-switch" class="status" style="margin-top: 301px;"></label>
+            <div class="s" style="margin-top: 301px; left: 69px;"></div>
+          </div>
+        </div>
+
+        <!-- Data Widget -->
+        <div class="widget data-widget">
+          <div class="title-dataWidget">Data Monitor</div>
+          <div class="subtitle-dataWidget">Real-time Data</div>
+
+          <div class="Row_1_dataWidget">
+            <div class="card card_temperature">
+              <div class="label" style="margin-top: 3px;"><i class="fas fa-thermometer-half"
+                  style="font-size: 20px; margin-right: 8px;"></i>Temperature
+              </div>
+              <div id="container_temperature" style="stroke: #fafafabd;"></div>
+            </div>
+
+            <div class="card card_waterlevel">
+              <div class="label" style="margin-top: 3px"><i class="fas fa-water"
+                  style="font-size: 20px; margin-right: 10px;"></i>Water Level</div>
+              <div id="container_waterlevel" style="stroke: #fafafabd;"></div>
+            </div>
+          </div>
+
+          <div class="Row_2_dataWidget">
+            <div class="card card_tds">
+              <div class="label" style="margin-top: 3px"><i class="fas fa-flask"
+                  style="font-size: 30px; margin-right: 8px;"></i>TDS</div>
+              <div id="container_tds" style="stroke: #fafafabd;"></div>
+            </div>
+
+            <div class="card card_ph">
+              <div class="label" style="margin-top: 3px"><i class="fas fa-flask"
+                  style="font-size: 30px; margin-right: 8px;"></i>pH</div>
+              <div id="container_ph" style="stroke: #fafafabd;"></div>
+            </div>
+          </div>
+
+          <div class="Row_3_dataWidget">
+            <div class="card_final card_conductivity">
+              <div class="label" style="margin-top: 3px"><i class="fas fa-plug"
+                  style="font-size: 30px; margin-right: 8px;"></i>Conductivity</div>
+              <div id="container_conductivity" style="stroke: #fafafabd;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chart Widget -->
+        <div class="widget chart-container1">
+          <figure class="highcharts-figure">
+            <div id="chart-container"></div>
+          </figure>
+        </div>
+        <div class="widget stream-monitor">
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  <script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/1.0.0/dist/progressbar.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="src/index.js"></script>
+</html>
