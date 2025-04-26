@@ -9,7 +9,7 @@ let Fan_ON, Fan_OFF, Heater_ON, Heater_OFF, Light_ON, Light_OFF, Feeder_ON, Feed
     Pumb_ON, Pumb_OFF, Filter_ON, Filter_OFF, SetAutoON, SetAutoOFF, RequestOTA, LoadingOTA;
 let configStatusFan, configStatusHeater, configStatusLight, configStatusFeeder, configStatusPump,
     configStatusFilter, configStatusAuto, configStatusOTA;
-let TemperatureValue = 50, WaterLevelValue = 30, TDSValue = 20, PHValue = 3, ConductivityValue;
+let TemperatureValue = 50, WaterLevelValue, TDSValue, PHValue, ConductivityValue;
 
 // Proxy for Status Tracking
 const statusProxy = new Proxy({
@@ -85,8 +85,9 @@ const initEraWidget = () => {
       statusProxy.StatusAuto = values[configStatusAuto.id]?.value ?? null;
       statusProxy.StatusOTA = values[configStatusOTA.id]?.value ?? null;
 
-      // Update progress bars
+      // Update progress bars and UI
       updateProgressBars();
+      updateUI();
     }
   });
 };
@@ -109,6 +110,19 @@ const DOM = {
   feederSwitch: document.querySelector('#feeder-switch'),
   autoBtn: document.querySelector('#auto-btn'),
   fotaBtn: document.querySelector('#fota-btn')
+};
+
+// Update UI
+const updateUI = () => {
+  DOM.lightIcon.classList.toggle('active', statusProxy.StatusLight);
+  DOM.lightSwitch.checked = statusProxy.StatusLight;
+  DOM.fanSwitch.checked = statusProxy.StatusFan;
+  DOM.heaterSwitch.checked = statusProxy.StatusHeater;
+  DOM.pumpSwitch.checked = statusProxy.StatusPump;
+  DOM.filterSwitch.checked = statusProxy.StatusFilter;
+  DOM.feederSwitch.checked = statusProxy.StatusFeeder;
+  DOM.autoBtn.checked = statusProxy.StatusAuto;
+  DOM.fotaBtn.checked = statusProxy.StatusOTA === 255 || statusProxy.StatusOTA === 254;
 };
 
 // Event Listeners
