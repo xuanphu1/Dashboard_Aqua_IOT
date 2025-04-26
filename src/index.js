@@ -230,7 +230,6 @@ const initEventListeners = () => {
     } else {
       eraWidget.triggerAction(SetAutoOFF.action, null);
     }
-    if (statusProxy.StatusAuto) requestAutoUpdate();
   });
 
   // OTA
@@ -238,26 +237,13 @@ const initEventListeners = () => {
     statusProxy.StatusOTA = statusProxy.StatusOTA === 255 ? 254 : 255;
     console.log('OTA status:', statusProxy.StatusOTA);
     if (statusProxy.StatusOTA === 255) {
-      eraWidget.triggerAction(RequestOTA.action, null);
-    } else if (statusProxy.StatusOTA === 254) {
       eraWidget.triggerAction(LoadingOTA.action, null);
+    } else if (statusProxy.StatusOTA === 254) {
+      eraWidget.triggerAction(RequestOTA.action, null);
     }
   });
 };
 
-// Auto Update Function
-const requestAutoUpdate = () => {
-  if (statusProxy.StatusAuto) {
-    if (statusProxy.StatusLight) {
-      DOM.lightIcon.classList.add('active');
-      DOM.lightSwitch.checked = true;
-    } else {
-      DOM.lightIcon.classList.remove('active');
-      DOM.lightSwitch.checked = false;
-    }
-    setTimeout(requestAutoUpdate, 1000);
-  }
-};
 
 // Initialize Progress Bars
 let progressBars;
