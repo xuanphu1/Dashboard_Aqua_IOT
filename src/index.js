@@ -40,7 +40,13 @@ const statusProxy = new Proxy({
 
 // Update UI
 const updateUI = () => {
-  DOM.lightIcon.classList.toggle('active', statusProxy.StatusLight);
+  DOM.lightEffect.classList.toggle('active', statusProxy.StatusLight);
+  DOM.fanEffect.classList.toggle('active', statusProxy.StatusFan);
+  DOM.heaterEffect.classList.toggle('active', statusProxy.StatusHeater);
+  DOM.pumbEffect.classList.toggle('active', statusProxy.StatusPump);
+  DOM.filterEffect.classList.toggle('active', statusProxy.StatusFilter);
+  DOM.feederEffect.classList.toggle('active', statusProxy.StatusFeeder);
+
   DOM.lightSwitch.checked = statusProxy.StatusLight;
   DOM.fanSwitch.checked = statusProxy.StatusFan;
   DOM.heaterSwitch.checked = statusProxy.StatusHeater;
@@ -50,9 +56,7 @@ const updateUI = () => {
   DOM.autoBtn.checked = statusProxy.StatusAuto;
   DOM.fotaBtn.checked = statusProxy.StatusOTA;
 
-
-  
-  isUpdatingUI = false; // Kết thúc cập nhật UI
+  isUpdatingUI = false;
 };
 
 // Initialize Era Widget
@@ -119,19 +123,28 @@ const initEraWidget = () => {
 // DOM Selectors
 const DOM = {
   weatherContainer: document.getElementById('weather-container'),
-  lightIcon: document.querySelector('.light-icon'),
+
+  lightEffect: document.querySelector('.Light-effect'),
+  fanEffect: document.querySelector('.Fan-effect'),
+  heaterEffect: document.querySelector('.Heater-effect'),
+  pumbEffect: document.querySelector('.Pumb-effect'),
+  filterEffect: document.querySelector('.Filter-effect'),
+  feederEffect: document.querySelector('.Feeder-effect'),
+
   lightStatus: document.querySelector('.light-widget .status'),
   fanStatus: document.querySelector('.fan-widget .status'),
   heaterStatus: document.querySelector('.heater-widget .status'),
   pumpStatus: document.querySelector('.pumb-widget .status'),
   filterStatus: document.querySelector('.filter-widget .status'),
   feederStatus: document.querySelector('.feeder-widget .status'),
+
   lightSwitch: document.querySelector('#light-switch'),
   fanSwitch: document.querySelector('#fan-switch'),
   heaterSwitch: document.querySelector('#heater-switch'),
   pumpSwitch: document.querySelector('#pumb-switch'),
   filterSwitch: document.querySelector('#filter-switch'),
   feederSwitch: document.querySelector('#feeder-switch'),
+
   autoBtn: document.querySelector('#auto-btn'),
   fotaBtn: document.querySelector('#fota-btn')
 };
@@ -145,83 +158,83 @@ const initEventListeners = () => {
     isUpdatingUI = true; // Bắt đầu cập nhật UI
     statusProxy.StatusLight = !statusProxy.StatusLight;
     if (statusProxy.StatusLight) {
-      DOM.lightIcon.classList.add('active');
+      DOM.lightEffect.classList.add('active');
       eraWidget.triggerAction(Light_ON.action, null);
     } else {
-      DOM.lightIcon.classList.remove('active');
+      DOM.lightEffect.classList.remove('active');
       eraWidget.triggerAction(Light_OFF.action, null);
     }
   });
 
   // Fan
-  DOM.fanStatus.addEventListener('click', () => {
-    isUpdatingUI = true; // Bắt đầu cập nhật UI
-    statusProxy.StatusFan = !statusProxy.StatusFan;
-    if (statusProxy.StatusFan) {
-      eraWidget.triggerAction(Fan_ON.action, null);
-    } else {
-      eraWidget.triggerAction(Fan_OFF.action, null);
-    }
-  });
+DOM.fanStatus.addEventListener('click', () => {
+  isUpdatingUI = true;
+  statusProxy.StatusFan = !statusProxy.StatusFan;
+  if (statusProxy.StatusFan) {
+    DOM.fanEffect.classList.add('active');
+    eraWidget.triggerAction(Fan_ON.action, null);
+  } else {
+    DOM.fanEffect.classList.remove('active');
+    eraWidget.triggerAction(Fan_OFF.action, null);
+  }
+});
 
 
-  // Heater
-  DOM.heaterStatus.addEventListener('click', () => {
-    isUpdatingUI = true; // Bắt đầu cập nhật UI
-    statusProxy.StatusHeater = !statusProxy.StatusHeater;
-    if (statusProxy.StatusHeater) {
-      eraWidget.triggerAction(Heater_ON.action, null);
-    } else {
-      eraWidget.triggerAction(Heater_OFF.action, null);
-    }
-  });
+ // Heater
+DOM.heaterStatus.addEventListener('click', () => {
+  isUpdatingUI = true;
+  statusProxy.StatusHeater = !statusProxy.StatusHeater;
+  if (statusProxy.StatusHeater) {
+    DOM.heaterEffect.classList.add('active');
+    eraWidget.triggerAction(Heater_ON.action, null);
+  } else {
+    DOM.heaterEffect.classList.remove('active');
+    eraWidget.triggerAction(Heater_OFF.action, null);
+  }
+});
 
-  // Pump
-  DOM.pumpStatus.addEventListener('click', () => {
-    isUpdatingUI = true; // Bắt đầu cập nhật UI
-    statusProxy.StatusPump = !statusProxy.StatusPump;
-    if (statusProxy.StatusPump) {
-      eraWidget.triggerAction(Pumb_ON.action, null);
-    } else {
-      eraWidget.triggerAction(Pumb_OFF.action, null);
-    }
-  });
-
-
-  // Filter
-  DOM.filterStatus.addEventListener('click', () => {
-    isUpdatingUI = true; // Bắt đầu cập nhật UI
-    statusProxy.StatusFilter = !statusProxy.StatusFilter;
-    if (statusProxy.StatusFilter) {
-      eraWidget.triggerAction(Filter_ON.action, null);
-    } else {
-      eraWidget.triggerAction(Filter_OFF.action, null);
-    }
-  });
+// Pump
+DOM.pumpStatus.addEventListener('click', () => {
+  isUpdatingUI = true;
+  statusProxy.StatusPump = !statusProxy.StatusPump;
+  if (statusProxy.StatusPump) {
+    DOM.pumbEffect.classList.add('active');
+    eraWidget.triggerAction(Pumb_ON.action, null);
+  } else {
+    DOM.pumbEffect.classList.remove('active');
+    eraWidget.triggerAction(Pumb_OFF.action, null);
+  }
+});
 
 
-  // Feeder
-  DOM.feederStatus.addEventListener('click', () => {
-    isUpdatingUI = true; // Bắt đầu cập nhật UI
-    statusProxy.StatusFeeder = !statusProxy.StatusFeeder;
-    if (statusProxy.StatusFeeder) {
-      eraWidget.triggerAction(Feeder_ON.action, null);
-    } else {
-      eraWidget.triggerAction(Feeder_OFF.action, null);
-    }
-  });
+
+// Filter
+DOM.filterStatus.addEventListener('click', () => {
+  isUpdatingUI = true;
+  statusProxy.StatusFilter = !statusProxy.StatusFilter;
+  if (statusProxy.StatusFilter) {
+    DOM.filterEffect.classList.add('active');
+    eraWidget.triggerAction(Filter_ON.action, null);
+  } else {
+    DOM.filterEffect.classList.remove('active');
+    eraWidget.triggerAction(Filter_OFF.action, null);
+  }
+});
 
 
-  // Auto mode
-  DOM.autoBtn.addEventListener('click', () => {
-    isUpdatingUI = true; // Bắt đầu cập nhật UI
-    statusProxy.StatusAuto = !statusProxy.StatusAuto;
-    if (statusProxy.StatusAuto) {
-      eraWidget.triggerAction(SetAutoON.action, null);
-    } else {
-      eraWidget.triggerAction(SetAutoOFF.action, null);
-    }
-  });
+// Feeder
+DOM.feederStatus.addEventListener('click', () => {
+  isUpdatingUI = true;
+  statusProxy.StatusFeeder = !statusProxy.StatusFeeder;
+  if (statusProxy.StatusFeeder) {
+    DOM.feederEffect.classList.add('active');
+    eraWidget.triggerAction(Feeder_ON.action, null);
+  } else {
+    DOM.feederEffect.classList.remove('active');
+    eraWidget.triggerAction(Feeder_OFF.action, null);
+  }
+});
+
 
 
   // OTA
@@ -438,3 +451,83 @@ const init = () => {
 
 // Run Application
 window.addEventListener('load', init);
+
+
+
+
+
+
+
+
+
+//===========Full Screen Feature==========
+// Add fullscreen button HTML to your document first
+const fullscreenButton = document.createElement("button");
+fullscreenButton.innerHTML = '<i class="fas fa-expand"></i>';
+fullscreenButton.className = "fullscreen-button";
+document.body.appendChild(fullscreenButton);
+
+// Add fullscreen functionality
+let isFullscreen = false;
+
+function toggleFullscreen() {
+  if (!isFullscreen) {
+    // Enter fullscreen
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) {
+      document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) {
+      document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) {
+      document.documentElement.msRequestFullscreen();
+    }
+    fullscreenButton.innerHTML = '<i class="fas fa-compress"></i>';
+  } else {
+    // Exit fullscreen
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    }
+    fullscreenButton.innerHTML = '<i class="fas fa-expand"></i>';
+  }
+  isFullscreen = !isFullscreen;
+}
+
+// Event listener for fullscreen button
+fullscreenButton.addEventListener("click", toggleFullscreen);
+
+// Update button icon when fullscreen changes through other means (like Esc key)
+document.addEventListener("fullscreenchange", function () {
+  isFullscreen = !!document.fullscreenElement;
+  fullscreenButton.innerHTML = isFullscreen
+    ? '<i class="fas fa-compress"></i>'
+    : '<i class="fas fa-expand"></i>';
+});
+
+// Handle fullscreen change for different browsers
+document.addEventListener("webkitfullscreenchange", function () {
+  isFullscreen = !!document.webkitFullscreenElement;
+  fullscreenButton.innerHTML = isFullscreen
+    ? '<i class="fas fa-compress"></i>'
+    : '<i class="fas fa-expand"></i>';
+});
+
+document.addEventListener("mozfullscreenchange", function () {
+  isFullscreen = !!document.mozFullScreenElement;
+  fullscreenButton.innerHTML = isFullscreen
+    ? '<i class="fas fa-compress"></i>'
+    : '<i class="fas fa-expand"></i>';
+});
+
+document.addEventListener("MSFullscreenChange", function () {
+  isFullscreen = !!document.msFullscreenElement;
+  fullscreenButton.innerHTML = isFullscreen
+    ? '<i class="fas fa-compress"></i>'
+    : '<i class="fas fa-expand"></i>';
+});

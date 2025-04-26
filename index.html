@@ -3,7 +3,7 @@
 <head>
   <script src="https://www.unpkg.com/@eohjsc/era-widget@1.1.3/src/index.js"></script>
 
-  <title>Smart Home Dashboard</title>
+  <title>Aqua Dashboard</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
@@ -41,15 +41,15 @@
       </div>
 
 
-
-
-
       <div class="widgets">
 
         <div class="widget Light-widget">
 
           <div class="title">Light</div>
-          <div class="light-icon" id="bedLightIcon">
+
+
+
+          <div class="iconLight">
             <img src="assets/imgs/3dKitchenLight.png" alt="imgBedLights" style="margin-top: 30px;" />
           </div>
 
@@ -61,6 +61,7 @@
             </label>
             <div class="s" style="margin-top: 80px;"></div>
           </div>
+          <div class="Light-effect"></div>
         </div>
 
 
@@ -69,16 +70,20 @@
 
 
           <div class="widget-title">Fan</div>
-          <div class="icon">
+
+          <div class="iconFan">
             <img src="assets/imgs/istockphoto-170640706-612x612-removebg-preview.png" alt="icon" />
           </div>
 
-              
+
           <div id="switch">
             <input type="checkbox" id="fan-switch" />
             <label for="fan-switch" class="status" style="margin-top: 266px;"></label>
             <div class="s" style="margin-top: 266px;"></div>
           </div>
+
+          <div class="Fan-effect"></div>
+
         </div>
 
 
@@ -87,16 +92,18 @@
 
 
           <div class="widget-title">Heater</div>
-          <div class="icon">
+          <div class="iconHeater">
             <img src="assets/imgs/heater-3d-model-obj-fbx-ma-removebg-preview.png" alt="icon" />
           </div>
 
-            
+
           <div id="switch">
             <input type="checkbox" id="heater-switch" />
             <label for="heater-switch" class="status" style="margin-top: 266px;"></label>
             <div class="s" style="margin-top: 266px;"></div>
           </div>
+
+          <div class="Heater-effect"></div> <!-- thêm dòng này -->
         </div>
 
 
@@ -104,7 +111,7 @@
         <div class="widget Pumb-widget">
 
           <div class="title">Pumb</div>
-          <div class="icon">
+          <div class="iconPumb">
             <img src="assets/imgs/tceb71rc-removebg-preview.png" alt="icon" />
           </div>
 
@@ -113,6 +120,7 @@
             <label for="pumb-switch" class="status" style="margin-top: 301px;"></label>
             <div class="s" style="margin-top: 301px;"></div>
           </div>
+          <div class="Pumb-effect"></div> <!-- thêm dòng này -->
         </div>
 
 
@@ -120,7 +128,7 @@
         <div class="widget Filter-widget">
 
           <div class="title">Filter</div>
-          <div class="icon">
+          <div class="iconFilter">
             <img src="assets/imgs/pngtree-3d-water-filter-images-png-image_13286731-removebg-preview.png" alt="icon" />
           </div>
 
@@ -129,14 +137,16 @@
             <label for="filter-switch" class="status" style="margin-top: 301px;"></label>
             <div class="s" style="margin-top: 301px;"></div>
           </div>
+          <div class="Filter-effect"></div> <!-- thêm dòng này -->
         </div>
 
         <div class="widget Feeder-widget">
 
           <div class="title">Feeder</div>
 
-          <div class="icon">
-            <img src="assets/imgs/solar-cell-powered-directional-fish-feeder-centrifugal-sprea-02-removebg-preview.png" alt="icon" />
+          <div class="iconFeeder">
+            <img src="assets/imgs/solar-cell-powered-directional-fish-feeder-centrifugal-sprea-02-removebg-preview.png"
+              alt="icon" />
           </div>
 
           <div id="switch">
@@ -144,6 +154,9 @@
             <label for="feeder-switch" class="status" style="margin-top: 301px;"></label>
             <div class="s" style="margin-top: 301px; left: 69px;"></div>
           </div>
+          
+          <div class="Feeder-effect"></div>
+
         </div>
 
         <!-- Data Widget -->
