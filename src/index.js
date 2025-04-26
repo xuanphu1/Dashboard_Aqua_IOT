@@ -26,6 +26,7 @@ const statusProxy = new Proxy({
     if (target[key] !== value) {
       console.log(`${key} changed from ${target[key]} to ${value}`);
       target[key] = value;
+      updateUI();
     }
     return true;
   }
@@ -87,7 +88,7 @@ const initEraWidget = () => {
 
       // Update progress bars and UI
       updateProgressBars();
-      updateUI();
+      
     }
   });
 };
