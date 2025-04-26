@@ -1,603 +1,445 @@
-// Get Data from Era Widget
+// Constants
+const API_KEY = 'ec224bde787c4001b0281007251802';
+const LOCATION = 'Hanoi';
+
+// State Variables
 const eraWidget = new EraWidget();
 let configTemp, configWater, configTDS, configPH, configConductivity;
-let Fan_ON, 
-    Fan_OFF, 
-    Heater_ON, 
-    Heater_OFF, 
-    Light_ON, 
-    Light_OFF, 
-    Feeder_ON, 
-    Feeder_OFF,
-    Pumb_ON, 
-    Pumb_OFF,
-    Filter_ON, 
-    Filter_OFF,
-    SetAutoON,
-    SetAutoOFF,
-    RequestOTA,
-    LoadingOTA;
+let Fan_ON, Fan_OFF, Heater_ON, Heater_OFF, Light_ON, Light_OFF, Feeder_ON, Feeder_OFF,
+    Pumb_ON, Pumb_OFF, Filter_ON, Filter_OFF, SetAutoON, SetAutoOFF, RequestOTA, LoadingOTA;
+let configStatusFan, configStatusHeater, configStatusLight, configStatusFeeder, configStatusPump,
+    configStatusFilter, configStatusAuto, configStatusOTA;
+let TemperatureValue = 50, WaterLevelValue = 30, TDSValue = 20, PHValue = 3, ConductivityValue;
 
-let configStatusFan, configStatusHeater, configStatusLight, configStatusFeeder, configStatusPump, configStatusFilter, configStatusAuto, configStatusOTA;
-let StatusPump, StatusLight, StatusFan, StatusFeeder, StatusHeater, StatusFilter, StatusAuto , StatusOTA ;
-let TemperatureValue = 10, WaterLevelValue, TDSValue, PHValue, ConductivityValue;
-
-eraWidget.init({
-  onConfiguration: (configuration) => {
-    configTemp = configuration.realtime_configs[0];
-    configTDS = configuration.realtime_configs[1];
-    configPH = configuration.realtime_configs[2];
-    configWater = configuration.realtime_configs[3];
-    configConductivity = configuration.realtime_configs[4];
-
-    configStatusFan = configuration.realtime_configs[5];
-    configStatusHeater = configuration.realtime_configs[6];
-    configStatusLight = configuration.realtime_configs[7];
-    configStatusFeeder = configuration.realtime_configs[8];
-    configStatusPump = configuration.realtime_configs[9];
-    configStatusFilter = configuration.realtime_configs[10];
-    configStatusAuto = configuration.realtime_configs[11];
-    configStatusOTA = configuration.realtime_configs[12];
-
-
-    Fan_ON = configuration.actions[0];
-    Fan_OFF = configuration.actions[1];
-    Heater_ON = configuration.actions[2];
-    Heater_OFF = configuration.actions[3];
-    Light_ON = configuration.actions[4];
-    Light_OFF = configuration.actions[5];
-    Feeder_ON = configuration.actions[6];
-    Feeder_OFF = configuration.actions[7];
-    Pumb_ON = configuration.actions[8];
-    Pumb_OFF = configuration.actions[9];
-    Filter_ON = configuration.actions[10];
-    Filter_OFF = configuration.actions[11];
-    SetAutoON = configuration.actions[12];
-    SetAutoOFF = configuration.actions[13];
-    RequestOTA = configuration.actions[14];
-    LoadingOTA = configuration.actions[15];
-
-
-  },
-  onValues: (values) => {
-    // Values
-    TemperatureValue = values[configTemp.id].value;
-    WaterLevelValue = values[configWater.id].value;
-    TDSValue = values[configTDS.id].value;
-    PHValue = values[configPH.id].value;
-    ConductivityValue = values[configConductivity.id].value;
-
-    // Status
-    StatusFan = values[configStatusFan.id].value;
-    StatusHeater = values[configStatusHeater.id].value;
-    StatusLight = values[configStatusLight.id].value;
-    StatusFeeder = values[configStatusFeeder.id].value;
-    StatusPump = values[configStatusPump.id].value;
-    StatusFilter = values[configStatusFilter.id].value;
-    StatusAuto = values[configStatusAuto.id].value;
-    StatusOTA = values[configStatusOTA.id].value;
-
-
-  },
-
-});
-
-// Widget Bed Light
-const widget = document.querySelector(".light-icon");
-const icon = document.querySelector(".light-icon");
-const status = document.querySelector(".status");
-
-
-const LightSwitch = document.querySelector("#light-switch");
-status.addEventListener("click", () => {
-  StatusLight = !StatusLight;
-  if (StatusLight) {
-    icon.classList.add("active");
-    eraWidget.triggerAction(Light_ON.action,null);
-
-  } else {
-    icon.classList.remove("active");
-    eraWidget.triggerAction(Light_OFF.action,null);
-  }
-});
-
-LightSwitch.addEventListener("change", () => {
-  console.log(LightSwitch.checked);
-});
-
-if (StatusLight) {
-  icon.classList.add("active");
-  LightSwitch.checked = true;
-} else {
-  icon.classList.remove("active");
-  LightSwitch.checked = false;
-}
-
-
-
-const FanSwitch = document.querySelector("#fan-switch");
-status.addEventListener("click", () => {
-  StatusFan = !StatusFan;
-  if (StatusFan) {
-    eraWidget.triggerAction(Fan_ON.action,null);
-  } else {
-    eraWidget.triggerAction(Fan_OFF.action,null);
-  }
-});
-
-FanSwitch.addEventListener("change", () => {
-  console.log(FanSwitch.checked);
-});
-
-if (StatusFan) {
-  FanSwitch.checked = true;
-} else {
-  FanSwitch.checked = false;
-}
-
-
-const HeaterSwitch = document.querySelector("#heater-switch");
-status.addEventListener("click", () => {
-  StatusHeater = !StatusHeater;
-  if (StatusHeater) {
-    eraWidget.triggerAction(Heater_ON.action,null);
-  } else {
-    eraWidget.triggerAction(Heater_OFF.action,null);
-  }
-});
-
-HeaterSwitch.addEventListener("change", () => {
-  console.log(HeaterSwitch.checked);
-});
-
-if (StatusHeater) {
-  HeaterSwitch.checked = true;
-} else {
-  HeaterSwitch.checked = false;
-}
-
-const PumbSwitch = document.querySelector("#pumb-switch");
-status.addEventListener("click", () => {
-  StatusPump = !StatusPump;
-  if (StatusPump) {
-    eraWidget.triggerAction(Pumb_ON.action,null);
-  } else {
-    eraWidget.triggerAction(Pumb_OFF.action,null);
-  }
-});
-
-PumbSwitch.addEventListener("change", () => {
-  console.log(PumbSwitch.checked);
-});
-
-if (StatusPump) {
-  PumbSwitch.checked = true;
-} else {
-  PumbSwitch.checked = false;
-}
-
-
-const FilterSwitch = document.querySelector("#filter-switch");
-status.addEventListener("click", () => {
-  StatusFilter = !StatusFilter;
-  if (StatusFilter) {
-    eraWidget.triggerAction(Filter_ON.action,null);
-  } else {
-    eraWidget.triggerAction(Filter_OFF.action,null);
-  }
-});
-
-FilterSwitch.addEventListener("change", () => {
-  console.log(FilterSwitch.checked);
-});
-
-if (StatusFilter) {
-  FilterSwitch.checked = true;
-} else {
-  FilterSwitch.checked = false;
-}
-
-const FeederSwitch = document.querySelector("#feeder-switch");
-status.addEventListener("click", () => {
-  StatusFeeder = !StatusFeeder;
-  if (StatusFeeder) {
-    eraWidget.triggerAction(Feeder_ON.action,null);
-  } else {
-    eraWidget.triggerAction(Feeder_OFF.action,null);
-  }
-});
-
-FeederSwitch.addEventListener("change", () => {
-  console.log(FeederSwitch.checked);
-});
-
-if (StatusFeeder) {
-  FeederSwitch.checked = true;
-} else {
-  FeederSwitch.checked = false;
-}
-
-
-
-
-const autoBtn = document.querySelector("#auto-btn");
-autoBtn.addEventListener("click", () => {
-  StatusAuto = !StatusAuto;
-  console.log("Auto mode: ", isAuto);
-  if (StatusAuto) {
-    // Ban all actions
-    eraWidget.triggerAction(SetAutoON.action,null);
-  } else {
-    eraWidget.triggerAction(SetAutoOFF.action,null);
-  }
-});
-
-const Requestota = document.querySelector("#fota-btn");
-Requestota.addEventListener("click", () => {
-  StatusOTA = !StatusOTA;
-  console.log("Auto mode: ", isAuto);
-  if (StatusOTA === 255) {
-    // Ban all actions
-    eraWidget.triggerAction(RequestOTA.action,null);
-  } else if (StatusOTA === 254){
-    eraWidget.triggerAction(LoadingOTA.action,null);
-  }
-});
-
-
-function requestAutoUpdate() {
-  if (isAuto) {
-    if (StatusLight) {
-      icon.classList.add("active");
-      LightSwitch.checked = true;
-    } else {
-      icon.classList.remove("active");
-      LightSwitch.checked = false;
+// Proxy for Status Tracking
+const statusProxy = new Proxy({
+  StatusFan: null,
+  StatusHeater: null,
+  StatusLight: null,
+  StatusFeeder: null,
+  StatusPump: null,
+  StatusFilter: null,
+  StatusAuto: null,
+  StatusOTA: null
+}, {
+  set(target, key, value) {
+    if (target[key] !== value) {
+      console.log(`${key} changed from ${target[key]} to ${value}`);
+      target[key] = value;
     }
-    setTimeout(() => requestAutoUpdate());
+    return true;
   }
-}
-
-
-//Temperature Gauge
-let tempProgressBar = new ProgressBar.SemiCircle("#container_temperature", {
-  strokeWidth: 12,
-  color: "white",
-  trailColor: "rgba(255,255,255, 0.4)",
-  trailWidth: 12,
-  easing: "easeInOut",
-  duration: 1400,
-  svgStyle: { width: "100%", height: "100%" },
-  text: {
-    value: "",
-    alignToBottom: false,
-    className: "progressbar_label",
-  },
-
-  step: (state, bar) => {
-    bar.path.setAttribute("stroke", state.color);
-    var value = Math.round(bar.value() * 100);
-    if (value === 0) {
-      bar.setText("");
-    } else {
-      bar.setText(value);
-    }
-
-    bar.text.style.color = state.color;
-  },
 });
-tempProgressBar.animate(TemperatureValue/100); // Number from 0.0 to 1.0
 
-//Water Level Bar
-let waterProgressBar = new ProgressBar.Line("#container_waterlevel", {
-  strokeWidth: 12,
-  color: "white",
-  trailColor: "rgba(255,255,255, 0.4)",
-  trailWidth: 12,
-  easing: "easeInOut",
-  duration: 1400,
-  svgStyle: { width: "100%", height: "100%" },
-  text: {
-    value: "",
-    className: "water_level_label",
-  },
-  step: (state, bar) => {
-    bar.path.setAttribute("stroke", state.color);
-    var value = Math.round(bar.value() * 100);
-    if (value === 0) {
-      bar.setText("");
-    } else {
-      bar.setText(value);
+// Initialize Era Widget
+const initEraWidget = () => {
+  eraWidget.init({
+    onConfiguration: (configuration) => {
+      configTemp = configuration.realtime_configs[0];
+      configTDS = configuration.realtime_configs[1];
+      configPH = configuration.realtime_configs[2];
+      configWater = configuration.realtime_configs[3];
+      configConductivity = configuration.realtime_configs[4];
+
+      configStatusFan = configuration.realtime_configs[5];
+      configStatusHeater = configuration.realtime_configs[6];
+      configStatusLight = configuration.realtime_configs[7];
+      configStatusFeeder = configuration.realtime_configs[8];
+      configStatusPump = configuration.realtime_configs[9];
+      configStatusFilter = configuration.realtime_configs[10];
+      configStatusAuto = configuration.realtime_configs[11];
+      configStatusOTA = configuration.realtime_configs[12];
+
+      Fan_ON = configuration.actions[0];
+      Fan_OFF = configuration.actions[1];
+      Heater_ON = configuration.actions[2];
+      Heater_OFF = configuration.actions[3];
+      Light_ON = configuration.actions[4];
+      Light_OFF = configuration.actions[5];
+      Feeder_ON = configuration.actions[6];
+      Feeder_OFF = configuration.actions[7];
+      Pumb_ON = configuration.actions[8];
+      Pumb_OFF = configuration.actions[9];
+      Filter_ON = configuration.actions[10];
+      Filter_OFF = configuration.actions[11];
+      SetAutoON = configuration.actions[12];
+      SetAutoOFF = configuration.actions[13];
+      RequestOTA = configuration.actions[14];
+      LoadingOTA = configuration.actions[15];
+    },
+    onValues: (values) => {
+      // Update values
+      TemperatureValue = values[configTemp.id]?.value ?? null;
+      WaterLevelValue = values[configWater.id]?.value ?? null;
+      TDSValue = values[configTDS.id]?.value ?? null;
+      PHValue = values[configPH.id]?.value ?? null;
+      ConductivityValue = values[configConductivity.id]?.value ?? null;
+
+      // Update status via Proxy
+      statusProxy.StatusFan = values[configStatusFan.id]?.value ?? null;
+      statusProxy.StatusHeater = values[configStatusHeater.id]?.value ?? null;
+      statusProxy.StatusLight = values[configStatusLight.id]?.value ?? null;
+      statusProxy.StatusFeeder = values[configStatusFeeder.id]?.value ?? null;
+      statusProxy.StatusPump = values[configStatusPump.id]?.value ?? null;
+      statusProxy.StatusFilter = values[configStatusFilter.id]?.value ?? null;
+      statusProxy.StatusAuto = values[configStatusAuto.id]?.value ?? null;
+      statusProxy.StatusOTA = values[configStatusOTA.id]?.value ?? null;
+
+      // Update progress bars
+      updateProgressBars();
     }
+  });
+};
 
-    bar.text.style.color = state.color;
-  },
-});
-waterProgressBar.animate(WaterLevelValue / 100); // Number from 0.0 to 1.0
+// DOM Selectors
+const DOM = {
+  weatherContainer: document.getElementById('weather-container'),
+  lightIcon: document.querySelector('.light-icon'),
+  lightStatus: document.querySelector('.light-widget .status'),
+  fanStatus: document.querySelector('.fan-widget .status'),
+  heaterStatus: document.querySelector('.heater-widget .status'),
+  pumpStatus: document.querySelector('.pumb-widget .status'),
+  filterStatus: document.querySelector('.filter-widget .status'),
+  feederStatus: document.querySelector('.feeder-widget .status'),
+  lightSwitch: document.querySelector('#light-switch'),
+  fanSwitch: document.querySelector('#fan-switch'),
+  heaterSwitch: document.querySelector('#heater-switch'),
+  pumpSwitch: document.querySelector('#pumb-switch'),
+  filterSwitch: document.querySelector('#filter-switch'),
+  feederSwitch: document.querySelector('#feeder-switch'),
+  autoBtn: document.querySelector('#auto-btn'),
+  fotaBtn: document.querySelector('#fota-btn')
+};
 
-//TDS bar
-let tdsProgressBar = new ProgressBar.Line("#container_tds", {
-  strokeWidth: 12,
-  trailColor: "rgba(255,255,255, 0.4)",
-  trailWidth: 12,
-  easing: "easeInOut",
-  duration: 1400,
-  svgStyle: { width: "100%", height: "100%" },
-  text: {
-    value: "",
-    className: "tds_label",
-  },
-  step: (state, bar) => {
-    bar.path.setAttribute("stroke", state.color);
-    var value = Math.round(bar.value() * 100);
-    if (value === 0) {
-      bar.setText("");
+// Event Listeners
+const initEventListeners = () => {
+  // Light
+  DOM.lightStatus.addEventListener('click', () => {
+    statusProxy.StatusLight = !statusProxy.StatusLight;
+    if (statusProxy.StatusLight) {
+      DOM.lightIcon.classList.add('active');
+      eraWidget.triggerAction(Light_ON.action, null);
     } else {
-      bar.setText(value);
+      DOM.lightIcon.classList.remove('active');
+      eraWidget.triggerAction(Light_OFF.action, null);
     }
+  });
 
-    bar.text.style.color = state.color;
-  },
-});
-tdsProgressBar.animate(TDSValue / 100); // Number from 0.0 to 1.0
+  DOM.lightSwitch.addEventListener('change', () => {
+    console.log('Light switch:', DOM.lightSwitch.checked);
+    statusProxy.StatusLight = DOM.lightSwitch.checked;
+    DOM.lightIcon.classList.toggle('active', statusProxy.StatusLight);
+  });
 
-//pH bar
-let phProgressBar = new ProgressBar.Line("#container_ph", {
-  strokeWidth: 12,
-  trailColor: "rgba(255,255,255, 0.4)",
-  trailWidth: 12,
-  easing: "easeInOut",
-  duration: 1400,
-  svgStyle: { width: "100%", height: "100%" },
-  text: {
-    value: "",
-    className: "ph_label",
-  },
-  step: (state, bar) => {
-    bar.path.setAttribute("stroke", state.color);
-    var value = Math.round(bar.value() * 100);
-    if (value === 0) {
-      bar.setText("");
+  // Fan
+  DOM.fanStatus.addEventListener('click', () => {
+    statusProxy.StatusFan = !statusProxy.StatusFan;
+    if (statusProxy.StatusFan) {
+      eraWidget.triggerAction(Fan_ON.action, null);
     } else {
-      bar.setText(value);
+      eraWidget.triggerAction(Fan_OFF.action, null);
     }
+  });
 
-    bar.text.style.color = state.color;
-  },
-});
-phProgressBar.animate(PHValue / 100); // Number from 0.0 to 1.0
+  DOM.fanSwitch.addEventListener('change', () => {
+    console.log('Fan switch:', DOM.fanSwitch.checked);
+    statusProxy.StatusFan = DOM.fanSwitch.checked;
+  });
 
-//Conductivity bar
-let conductProgressBar = new ProgressBar.Line("#container_conductivity", {
-  strokeWidth: 12,
-  trailColor: "rgba(255,255,255, 0.4)",
-  trailWidth: 12,
-  easing: "easeInOut",
-  duration: 1400,
-  svgStyle: { width: "100%", height: "100%" },
-  text: {
-    value: "",
-    className: "conductivity_label",
-  },
-  step: (state, bar) => {
-    bar.path.setAttribute("stroke", state.color);
-    var value = Math.round(bar.value() * 100);
-    if (value === 0) {
-      bar.setText("");
+  // Heater
+  DOM.heaterStatus.addEventListener('click', () => {
+    statusProxy.StatusHeater = !statusProxy.StatusHeater;
+    if (statusProxy.StatusHeater) {
+      eraWidget.triggerAction(Heater_ON.action, null);
     } else {
-      bar.setText(value);
+      eraWidget.triggerAction(Heater_OFF.action, null);
     }
+  });
 
-    bar.text.style.color = state.color;
-  },
-});
-conductProgressBar.animate(ConductivityValue / 100); // Number from 0.0 to 1.0
+  DOM.heaterSwitch.addEventListener('change', () => {
+    console.log('Heater switch:', DOM.heaterSwitch.checked);
+    statusProxy.StatusHeater = DOM.heaterSwitch.checked;
+  });
 
-// Khởi tạo dữ liệu ban đầu
-function generateInitialData() {
-  const data = [];
-  const time = new Date().getTime();
-  for (let i = -19; i <= 0; i += 1) {
-    data.push({
-      x: time + i * 1000,
-      y: Math.random()
-    });
+  // Pump
+  DOM.pumpStatus.addEventListener('click', () => {
+    statusProxy.StatusPump = !statusProxy.StatusPump;
+    if (statusProxy.StatusPump) {
+      eraWidget.triggerAction(Pumb_ON.action, null);
+    } else {
+      eraWidget.triggerAction(Pumb_OFF.action, null);
+    }
+  });
+
+  DOM.pumpSwitch.addEventListener('change', () => {
+    console.log('Pump switch:', DOM.pumpSwitch.checked);
+    statusProxy.StatusPump = DOM.pumpSwitch.checked;
+  });
+
+  // Filter
+  DOM.filterStatus.addEventListener('click', () => {
+    statusProxy.StatusFilter = !statusProxy.StatusFilter;
+    if (statusProxy.StatusFilter) {
+      eraWidget.triggerAction(Filter_ON.action, null);
+    } else {
+      eraWidget.triggerAction(Filter_OFF.action, null);
+    }
+  });
+
+  DOM.filterSwitch.addEventListener('change', () => {
+    console.log('Filter switch:', DOM.filterSwitch.checked);
+    statusProxy.StatusFilter = DOM.filterSwitch.checked;
+  });
+
+  // Feeder
+  DOM.feederStatus.addEventListener('click', () => {
+    statusProxy.StatusFeeder = !statusProxy.StatusFeeder;
+    if (statusProxy.StatusFeeder) {
+      eraWidget.triggerAction(Feeder_ON.action, null);
+    } else {
+      eraWidget.triggerAction(Feeder_OFF.action, null);
+    }
+  });
+
+  DOM.feederSwitch.addEventListener('change', () => {
+    console.log('Feeder switch:', DOM.feederSwitch.checked);
+    statusProxy.StatusFeeder = DOM.feederSwitch.checked;
+  });
+
+  // Auto mode
+  DOM.autoBtn.addEventListener('click', () => {
+    statusProxy.StatusAuto = !statusProxy.StatusAuto;
+    console.log('Auto mode:', statusProxy.StatusAuto);
+    if (statusProxy.StatusAuto) {
+      eraWidget.triggerAction(SetAutoON.action, null);
+    } else {
+      eraWidget.triggerAction(SetAutoOFF.action, null);
+    }
+    if (statusProxy.StatusAuto) requestAutoUpdate();
+  });
+
+  // OTA
+  DOM.fotaBtn.addEventListener('click', () => {
+    statusProxy.StatusOTA = statusProxy.StatusOTA === 255 ? 254 : 255;
+    console.log('OTA status:', statusProxy.StatusOTA);
+    if (statusProxy.StatusOTA === 255) {
+      eraWidget.triggerAction(RequestOTA.action, null);
+    } else if (statusProxy.StatusOTA === 254) {
+      eraWidget.triggerAction(LoadingOTA.action, null);
+    }
+  });
+};
+
+// Auto Update Function
+const requestAutoUpdate = () => {
+  if (statusProxy.StatusAuto) {
+    if (statusProxy.StatusLight) {
+      DOM.lightIcon.classList.add('active');
+      DOM.lightSwitch.checked = true;
+    } else {
+      DOM.lightIcon.classList.remove('active');
+      DOM.lightSwitch.checked = false;
+    }
+    setTimeout(requestAutoUpdate, 1000);
   }
-  return data;
-}
+};
 
-// Hàm tạo hiệu ứng di chuyển giống Conductivity
-function addConductivityEffect(series, point) {
-  if (!series.pulse) {
-    series.pulse = series.chart.renderer.circle()
-      .attr({ r: 5, opacity: 0 })
-      .add(series.markerGroup);
-  }
+// Initialize Progress Bars
+let progressBars;
+const initProgressBars = () => {
+  const commonConfig = {
+    strokeWidth: 12,
+    color: 'white',
+    trailColor: 'rgba(255,255,255, 0.4)',
+    trailWidth: 12,
+    easing: 'easeInOut',
+    duration: 1400,
+    svgStyle: { width: '100%', height: '100%' },
+    step: (state, bar) => {
+      bar.path.setAttribute('stroke', state.color);
+      const value = Math.round(bar.value() * 100);
+      bar.setText(value || '');
+      bar.text.style.color = state.color;
+    }
+  };
 
-  setTimeout(() => {
-    series.pulse
-      .attr({
-        x: series.xAxis.toPixels(point.x, true),
-        y: series.yAxis.toPixels(point.y, true),
-        r: 5,
-        opacity: 1,
-        fill: series.color
-      })
-      .animate({
-        r: 20,
-        opacity: 0
-      }, { duration: 1000 });
-  }, 1);
-}
+  progressBars = {
+    temp: new ProgressBar.SemiCircle('#container_temperature', {
+      ...commonConfig,
+      text: { value: '', alignToBottom: false, className: 'progressbar_label' }
+    }),
+    water: new ProgressBar.Line('#container_waterlevel', {
+      ...commonConfig,
+      text: { value: '', className: 'water_level_label' }
+    }),
+    tds: new ProgressBar.Line('#container_tds', {
+      ...commonConfig,
+      text: { value: '', className: 'tds_label' }
+    }),
+    ph: new ProgressBar.Line('#container_ph', {
+      ...commonConfig,
+      text: { value: '', className: 'ph_label' }
+    }),
+    conductivity: new ProgressBar.Line('#container_conductivity', {
+      ...commonConfig,
+      text: { value: '', className: 'conductivity_label' }
+    })
+  };
 
+  // Initial animation
+  progressBars.temp.animate(TemperatureValue / 100);
+  progressBars.water.animate(WaterLevelValue / 100);
+  progressBars.tds.animate(TDSValue / 100);
+  progressBars.ph.animate(PHValue / 100);
+  progressBars.conductivity.animate(ConductivityValue / 100);
+};
 
+// Update Progress Bars
+const updateProgressBars = () => {
+  progressBars.temp.animate(TemperatureValue / 100);
+  progressBars.water.animate(WaterLevelValue / 100);
+  progressBars.tds.animate(TDSValue / 100);
+  progressBars.ph.animate(PHValue / 100);
+  progressBars.conductivity.animate(ConductivityValue / 100);
+};
 
-function onChartLoad() {
-  const chart = this,
-    series = chart.series;
+// Initialize Highcharts
+const initHighcharts = () => {
+  const generateInitialData = () => {
+    const data = [];
+    const time = new Date().getTime();
+    for (let i = -19; i <= 0; i++) {
+      data.push({ x: time + i * 1000, y: Math.random() });
+    }
+    return data;
+  };
 
-  setInterval(function () {
-    const x = (new Date()).getTime();
+  const addConductivityEffect = (series, point) => {
+    if (!series.pulse) {
+      series.pulse = series.chart.renderer.circle()
+        .attr({ r: 5, opacity: 0 })
+        .add(series.markerGroup);
+    }
+    setTimeout(() => {
+      series.pulse
+        .attr({
+          x: series.xAxis.toPixels(point.x, true),
+          y: series.yAxis.toPixels(point.y, true),
+          r: 5,
+          opacity: 1,
+          fill: series.color
+        })
+        .animate({ r: 20, opacity: 0 }, { duration: 1000 });
+    }, 1);
+  };
 
-    // Dữ liệu thực tế từ Era Widget
-    let newDataPoints = [
-      { seriesIndex: 0, y: TemperatureValue },  // Temperature (°C)
-      { seriesIndex: 1, y: WaterLevelValue },  // Water Level (%)
-      { seriesIndex: 2, y: Math.min(TDSValue, 100) },  // TDS Value (ppm) (giới hạn từ 0 - 100)
-      { seriesIndex: 3, y: PHValue },  // PH Value
-      { seriesIndex: 4, y: Math.min(ConductivityValue, 100) }  // Conductivity (μS/cm) (giới hạn từ 0 - 100)
-    ];
-
-    newDataPoints.forEach((dataPoint) => {
-      let seriesTarget = series[dataPoint.seriesIndex];
-      seriesTarget.addPoint([x, dataPoint.y], true, true);
-      addConductivityEffect(seriesTarget, { x, y: dataPoint.y });
-    });
-
-  }, 1000);
-}
-
-// Plugin to add a pulsating marker on add point
-Highcharts.addEvent(Highcharts.Series, 'addPoint', e => {
-  const point = e.point,
-    series = e.target;
-
-  if (!series.pulse) {
-    series.pulse = series.chart.renderer.circle()
-      .add(series.markerGroup);
-  }
-
-  setTimeout(() => {
-    series.pulse
-      .attr({
-        x: series.xAxis.toPixels(point.x, true),
-        y: series.yAxis.toPixels(point.y, true),
-        r: series.options.marker.radius,
-        opacity: 1,
-        fill: series.color
-      })
-      .animate({
-        r: 20,
-        opacity: 0
-      }, {
-        duration: 1000,
+  const onChartLoad = function () {
+    const chart = this;
+    const series = chart.series;
+    setInterval(() => {
+      const x = new Date().getTime();
+      const newDataPoints = [
+        { seriesIndex: 0, y: TemperatureValue },
+        { seriesIndex: 1, y: WaterLevelValue },
+        { seriesIndex: 2, y: Math.min(TDSValue, 100) },
+        { seriesIndex: 3, y: PHValue },
+        { seriesIndex: 4, y: Math.min(ConductivityValue, 100) }
+      ];
+      newDataPoints.forEach((dataPoint) => {
+        const seriesTarget = series[dataPoint.seriesIndex];
+        seriesTarget.addPoint([x, dataPoint.y], true, true);
+        addConductivityEffect(seriesTarget, { x, y: dataPoint.y });
       });
-  }, 1);
+    }, 1000);
+  };
 
-
-});
-
-
-Highcharts.chart('chart-container', {
-  chart: {
-    type: 'spline',
-    events: {
-      load: onChartLoad
+  Highcharts.addEvent(Highcharts.Series, 'addPoint', (e) => {
+    const point = e.point;
+    const series = e.target;
+    if (!series.pulse) {
+      series.pulse = series.chart.renderer.circle().add(series.markerGroup);
     }
-  },
+    setTimeout(() => {
+      series.pulse
+        .attr({
+          x: series.xAxis.toPixels(point.x, true),
+          y: series.yAxis.toPixels(point.y, true),
+          r: series.options.marker.radius,
+          opacity: 1,
+          fill: series.color
+        })
+        .animate({ r: 20, opacity: 0 }, { duration: 1000 });
+    }, 1);
+  });
 
-  time: {
-    useUTC: false
-  },
-
-  title: {
-    text: 'Live random data',
-    style: {
-      color: '#FFFFFF',
-    }
-  },
-
-  accessibility: {
-    announceNewData: {
-      enabled: true,
-      minAnnounceInterval: 15000,
-      announcementFormatter: function (allSeries, newSeries, newPoint) {
-        if (newPoint) {
-          return 'New point added. Value: ' + newPoint.y;
-        }
-        return false;
-      }
-    }
-  },
-
-  xAxis: {
-    type: 'datetime',
-    tickPixelInterval: 150,
-    maxPadding: 0.1,
-    lineColor: '#FFFFFF',
-    tickColor: '#FFFFFF',
-    labels: {
-      style: {
-        color: '#FFFFFF',
-      }
-    }
-  },
-
-  yAxis: {
-    title: {
-      text: 'Value',
-      style: {
-        color: '#FFFFFF',
+  Highcharts.chart('chart-container', {
+    chart: { type: 'spline', events: { load: onChartLoad } },
+    time: { useUTC: false },
+    title: { text: 'Live random data', style: { color: '#FFFFFF' } },
+    accessibility: {
+      announceNewData: {
+        enabled: true,
+        minAnnounceInterval: 15000,
+        announcementFormatter: (allSeries, newSeries, newPoint) =>
+          newPoint ? 'New point added. Value: ' + newPoint.y : false
       }
     },
-    lineColor: '#FFFFFF',
-    tickColor: '#FFFFFF',
-    labels: {
-      style: {
-        color: '#FFFFFF',
-      }
+    xAxis: {
+      type: 'datetime',
+      tickPixelInterval: 150,
+      maxPadding: 0.1,
+      lineColor: '#FFFFFF',
+      tickColor: '#FFFFFF',
+      labels: { style: { color: '#FFFFFF' } }
     },
-    plotLines: [
-      {
-        value: 0,
-        width: 1,
-        color: '#FFFFFF',
-      }
+    yAxis: {
+      title: { text: 'Value', style: { color: '#FFFFFF' } },
+      lineColor: '#FFFFFF',
+      tickColor: '#FFFFFF',
+      labels: { style: { color: '#FFFFFF' } },
+      plotLines: [{ value: 0, width: 1, color: '#FFFFFF' }]
+    },
+    tooltip: {
+      headerFormat: '<b>{series.name}</b><br/>',
+      pointFormat: '{point.x:%Y-%m-%d %H:%M:%S}<br/>{point.y:.2f}'
+    },
+    legend: { enabled: true },
+    exporting: { enabled: false },
+    series: [
+      { name: 'Temperature (°C)', lineWidth: 2, color: 'red', data: generateInitialData() },
+      { name: 'Water Level (%)', lineWidth: 2, color: 'blue', data: generateInitialData(), visible: false },
+      { name: 'TDS Value (ppm)', lineWidth: 2, color: 'green', data: generateInitialData(), visible: false },
+      { name: 'PH Value', lineWidth: 2, color: 'yellow', data: generateInitialData(), visible: false },
+      { name: 'Conductivity (μS/cm)', lineWidth: 2, color: 'purple', data: generateInitialData(), visible: false }
     ]
-  },
+  });
+};
 
-  tooltip: {
-    headerFormat: '<b>{series.name}</b><br/>',
-    pointFormat: '{point.x:%Y-%m-%d %H:%M:%S}<br/>{point.y:.2f}'
-  },
-
-  legend: {
-    enabled: true
-  },
-
-  exporting: {
-    enabled: false
-  },
-
-  series: [
-    { name: 'Temperature (°C)', lineWidth: 2, color: 'red', data: generateInitialData() },
-    { name: 'Water Level (%)', lineWidth: 2, color: 'blue', data: generateInitialData(), visible: false },
-    { name: 'TDS Value (ppm)', lineWidth: 2, color: 'green', data: generateInitialData(), visible: false },
-    { name: 'PH Value', lineWidth: 2, color: 'yellow', data: generateInitialData(), visible: false },
-    { name: 'Conductivity (μS/cm)', lineWidth: 2, color: 'purple', data: generateInitialData(), visible: false }
-  ]
-});
-
-const weatherContainer = document.getElementById('weather-container');
-const apiKey = 'ec224bde787c4001b0281007251802'
-async function weather(params) {
+// Fetch Weather Data
+const fetchWeather = async (location) => {
   try {
-      const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${params}&aqi=yes`);
-      if (!response.ok) {  
-          throw new Error(`${response.status}`);  
-      }
-      return await response.json();
+    const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${location}&aqi=yes`);
+    if (!response.ok) throw new Error(`${response.status}`);
+    const data = await response.json();
+    DOM.weatherContainer.innerHTML = `
+      <div class="weather-icon">🌍</div>
+      <p>Weather in ${data.location.name}, ${data.location.country}: </p>
+      <p>🌡️ ${data.current.temp_c}°C</p>
+      <p>💨 ${data.current.wind_kph} km/h</p>
+    `;
   } catch (error) {
-      console.log("❌ Error fetching data:", error.message);
+    console.log('❌ Error fetching data:', error.message);
   }
-}
+};
 
-window.addEventListener('load', async () => {
-  let result = await weather("Hanoi");
-  weatherContainer.innerHTML = `
-    <div class="weather-icon">🌍</div>
-    <p>Weather in ${result.location.name}, ${result.location.country}: </p>
-    <p>🌡️ ${result.current.temp_c}°C</p>
-    <p>💨 ${result.current.wind_kph} km/h</p>
-  `;
-});
+// Initialize Application
+const init = () => {
+  initEraWidget();
+  initProgressBars();
+  initHighcharts();
+  initEventListeners();
+  fetchWeather(LOCATION);
+};
+
+// Run Application
+window.addEventListener('load', init);
