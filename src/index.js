@@ -18,9 +18,9 @@ let Fan_ON,
     RequestOTA,
     LoadingOTA;
 
-    let configStatusFan, configStatusHeater, configStatusLight, configStatusFeeder, configStatusPump, configStatusFilter, configStatusAuto, configStatusOTA;
+let configStatusFan, configStatusHeater, configStatusLight, configStatusFeeder, configStatusPump, configStatusFilter, configStatusAuto, configStatusOTA;
 let StatusPump, StatusLight, StatusFan, StatusFeeder, StatusHeater, StatusFilter, StatusAuto , StatusOTA ;
-let TemperatureValue, WaterLevelValue, TDSValue, PHValue, ConductivityValue;
+let TemperatureValue = 10, WaterLevelValue, TDSValue, PHValue, ConductivityValue;
 
 eraWidget.init({
   onConfiguration: (configuration) => {
@@ -76,6 +76,8 @@ eraWidget.init({
     StatusFilter = values[configStatusFilter.id].value;
     StatusAuto = values[configStatusAuto.id].value;
     StatusOTA = values[configStatusOTA.id].value;
+
+
   },
 
 });
@@ -92,24 +94,10 @@ status.addEventListener("click", () => {
   if (StatusLight) {
     icon.classList.add("active");
     eraWidget.triggerAction(Light_ON.action,null);
-    // eraWidget.triggerAction(SetAutoON.action,null);
-    // eraWidget.triggerAction(Filter_ON.action,null);
-    // eraWidget.triggerAction(Pumb_ON.action,null);
-    // eraWidget.triggerAction(Fan_ON.action,null);
-    // eraWidget.triggerAction(Heater_ON.action,null);
-    // eraWidget.triggerAction(Feeder_ON.action,null);
-    // eraWidget.triggerAction(RequestOTA.action,null);
 
   } else {
     icon.classList.remove("active");
     eraWidget.triggerAction(Light_OFF.action,null);
-    // eraWidget.triggerAction(SetAutoOFF.action,null);
-    // eraWidget.triggerAction(Filter_OFF.action,null);
-    // eraWidget.triggerAction(Pumb_OFF.action,null);
-    // eraWidget.triggerAction(Fan_OFF.action,null);
-    // eraWidget.triggerAction(Heater_OFF.action,null);
-    // eraWidget.triggerAction(Feeder_OFF.action,null);
-    // eraWidget.triggerAction(LoadingOTA.action,null);
   }
 });
 
@@ -127,31 +115,135 @@ if (StatusLight) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-let isAuto = false;
-const autoBtn = document.querySelector("#auto-btn");
-autoBtn.addEventListener("click", () => {
-  isAuto = !isAuto;
-  console.log("Auto mode: ", isAuto);
-  if (isAuto) {
-    requestAutoUpdate();
+const FanSwitch = document.querySelector("#fan-switch");
+status.addEventListener("click", () => {
+  StatusFan = !StatusFan;
+  if (StatusFan) {
+    eraWidget.triggerAction(Fan_ON.action,null);
+  } else {
+    eraWidget.triggerAction(Fan_OFF.action,null);
   }
 });
+
+FanSwitch.addEventListener("change", () => {
+  console.log(FanSwitch.checked);
+});
+
+if (StatusFan) {
+  FanSwitch.checked = true;
+} else {
+  FanSwitch.checked = false;
+}
+
+
+const HeaterSwitch = document.querySelector("#heater-switch");
+status.addEventListener("click", () => {
+  StatusHeater = !StatusHeater;
+  if (StatusHeater) {
+    eraWidget.triggerAction(Heater_ON.action,null);
+  } else {
+    eraWidget.triggerAction(Heater_OFF.action,null);
+  }
+});
+
+HeaterSwitch.addEventListener("change", () => {
+  console.log(HeaterSwitch.checked);
+});
+
+if (StatusHeater) {
+  HeaterSwitch.checked = true;
+} else {
+  HeaterSwitch.checked = false;
+}
+
+const PumbSwitch = document.querySelector("#pumb-switch");
+status.addEventListener("click", () => {
+  StatusPump = !StatusPump;
+  if (StatusPump) {
+    eraWidget.triggerAction(Pumb_ON.action,null);
+  } else {
+    eraWidget.triggerAction(Pumb_OFF.action,null);
+  }
+});
+
+PumbSwitch.addEventListener("change", () => {
+  console.log(PumbSwitch.checked);
+});
+
+if (StatusPump) {
+  PumbSwitch.checked = true;
+} else {
+  PumbSwitch.checked = false;
+}
+
+
+const FilterSwitch = document.querySelector("#filter-switch");
+status.addEventListener("click", () => {
+  StatusFilter = !StatusFilter;
+  if (StatusFilter) {
+    eraWidget.triggerAction(Filter_ON.action,null);
+  } else {
+    eraWidget.triggerAction(Filter_OFF.action,null);
+  }
+});
+
+FilterSwitch.addEventListener("change", () => {
+  console.log(FilterSwitch.checked);
+});
+
+if (StatusFilter) {
+  FilterSwitch.checked = true;
+} else {
+  FilterSwitch.checked = false;
+}
+
+const FeederSwitch = document.querySelector("#feeder-switch");
+status.addEventListener("click", () => {
+  StatusFeeder = !StatusFeeder;
+  if (StatusFeeder) {
+    eraWidget.triggerAction(Feeder_ON.action,null);
+  } else {
+    eraWidget.triggerAction(Feeder_OFF.action,null);
+  }
+});
+
+FeederSwitch.addEventListener("change", () => {
+  console.log(FeederSwitch.checked);
+});
+
+if (StatusFeeder) {
+  FeederSwitch.checked = true;
+} else {
+  FeederSwitch.checked = false;
+}
+
+
+
+
+const autoBtn = document.querySelector("#auto-btn");
+autoBtn.addEventListener("click", () => {
+  StatusAuto = !StatusAuto;
+  console.log("Auto mode: ", isAuto);
+  if (StatusAuto) {
+    // Ban all actions
+    eraWidget.triggerAction(SetAutoON.action,null);
+  } else {
+    eraWidget.triggerAction(SetAutoOFF.action,null);
+  }
+});
+
+const Requestota = document.querySelector("#fota-btn");
+Requestota.addEventListener("click", () => {
+  StatusOTA = !StatusOTA;
+  console.log("Auto mode: ", isAuto);
+  if (StatusOTA === 255) {
+    // Ban all actions
+    eraWidget.triggerAction(RequestOTA.action,null);
+  } else if (StatusOTA === 254){
+    eraWidget.triggerAction(LoadingOTA.action,null);
+  }
+});
+
 
 function requestAutoUpdate() {
   if (isAuto) {
@@ -166,7 +258,7 @@ function requestAutoUpdate() {
   }
 }
 
-let TemperatureGauge = TemperatureValue;
+
 //Temperature Gauge
 let tempProgressBar = new ProgressBar.SemiCircle("#container_temperature", {
   strokeWidth: 12,
@@ -194,7 +286,7 @@ let tempProgressBar = new ProgressBar.SemiCircle("#container_temperature", {
     bar.text.style.color = state.color;
   },
 });
-tempProgressBar.animate(TemperatureGauge / 100); // Number from 0.0 to 1.0
+tempProgressBar.animate(TemperatureValue/100); // Number from 0.0 to 1.0
 
 //Water Level Bar
 let waterProgressBar = new ProgressBar.Line("#container_waterlevel", {
@@ -337,6 +429,9 @@ function addConductivityEffect(series, point) {
       }, { duration: 1000 });
   }, 1);
 }
+
+
+
 function onChartLoad() {
   const chart = this,
     series = chart.series;
@@ -388,6 +483,8 @@ Highcharts.addEvent(Highcharts.Series, 'addPoint', e => {
         duration: 1000,
       });
   }, 1);
+
+
 });
 
 
