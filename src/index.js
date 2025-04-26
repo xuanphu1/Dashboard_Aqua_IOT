@@ -15,14 +15,14 @@ let TemperatureValue = 50, WaterLevelValue, TDSValue, PHValue, ConductivityValue
 let isUpdatingUI = false;
 
 const statusProxy = new Proxy({
-  StatusFan: null,
-  StatusHeater: null,
-  StatusLight: null,
-  StatusFeeder: null,
-  StatusPump: null,
-  StatusFilter: null,
-  StatusAuto: null,
-  StatusOTA: null
+  StatusFan: 0,
+  StatusHeater: 0,
+  StatusLight: 0,
+  StatusFeeder: 0,
+  StatusPump: 0,
+  StatusFilter: 0,
+  StatusAuto: 0,
+  StatusOTA: 0
 }, {
   set(target, key, value) {
     if (target[key] !== value) {
@@ -149,6 +149,7 @@ const initEventListeners = () => {
   });
 
   DOM.lightSwitch.addEventListener('change', () => {
+    isUpdatingUI = true; // Bắt đầu cập nhật UI
     console.log('Light switch:', DOM.lightSwitch.checked);
     statusProxy.StatusLight = DOM.lightSwitch.checked;
     DOM.lightIcon.classList.toggle('active', statusProxy.StatusLight);
@@ -166,6 +167,7 @@ const initEventListeners = () => {
   });
 
   DOM.fanSwitch.addEventListener('change', () => {
+    isUpdatingUI = true; // Bắt đầu cập nhật UI
     console.log('Fan switch:', DOM.fanSwitch.checked);
     statusProxy.StatusFan = DOM.fanSwitch.checked;
   });
@@ -182,6 +184,7 @@ const initEventListeners = () => {
   });
 
   DOM.heaterSwitch.addEventListener('change', () => {
+    isUpdatingUI = true; // Bắt đầu cập nhật UI
     console.log('Heater switch:', DOM.heaterSwitch.checked);
     statusProxy.StatusHeater = DOM.heaterSwitch.checked;
   });
@@ -198,6 +201,7 @@ const initEventListeners = () => {
   });
 
   DOM.pumpSwitch.addEventListener('change', () => {
+    isUpdatingUI = true; // Bắt đầu cập nhật UI
     console.log('Pump switch:', DOM.pumpSwitch.checked);
     statusProxy.StatusPump = DOM.pumpSwitch.checked;
   });
@@ -214,6 +218,7 @@ const initEventListeners = () => {
   });
 
   DOM.filterSwitch.addEventListener('change', () => {
+    isUpdatingUI = true; // Bắt đầu cập nhật UI
     console.log('Filter switch:', DOM.filterSwitch.checked);
     statusProxy.StatusFilter = DOM.filterSwitch.checked;
   });
@@ -230,6 +235,7 @@ const initEventListeners = () => {
   });
 
   DOM.feederSwitch.addEventListener('change', () => {
+    isUpdatingUI = true; // Bắt đầu cập nhật UI
     console.log('Feeder switch:', DOM.feederSwitch.checked);
     statusProxy.StatusFeeder = DOM.feederSwitch.checked;
   });
@@ -246,6 +252,7 @@ const initEventListeners = () => {
   });
 
   DOM.autoBtn.addEventListener('change', () => {
+    isUpdatingUI = true; // Bắt đầu cập nhật UI
     console.log('Auto switch:', DOM.autoBtn.checked);
     statusProxy.StatusAuto = DOM.autoBtn.checked;
   });
@@ -263,6 +270,7 @@ const initEventListeners = () => {
   });
 
   DOM.fotaBtn.addEventListener('change', () => {
+    isUpdatingUI = true; // Bắt đầu cập nhật UI
     console.log('OTA switch:', DOM.fotaBtn.checked);
     statusProxy.StatusOTA = DOM.fotaBtn.checked;
   });
