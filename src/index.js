@@ -92,24 +92,24 @@ status.addEventListener("click", () => {
   if (StatusLight) {
     icon.classList.add("active");
     eraWidget.triggerAction(Light_ON.action,null);
-    eraWidget.triggerAction(SetAutoON.action,null);
-    eraWidget.triggerAction(Filter_ON.action,null);
-    eraWidget.triggerAction(Pumb_ON.action,null);
-    eraWidget.triggerAction(Fan_ON.action,null);
-    eraWidget.triggerAction(Heater_ON.action,null);
-    eraWidget.triggerAction(Feeder_ON.action,null);
-    eraWidget.triggerAction(RequestOTA.action,null);
+    // eraWidget.triggerAction(SetAutoON.action,null);
+    // eraWidget.triggerAction(Filter_ON.action,null);
+    // eraWidget.triggerAction(Pumb_ON.action,null);
+    // eraWidget.triggerAction(Fan_ON.action,null);
+    // eraWidget.triggerAction(Heater_ON.action,null);
+    // eraWidget.triggerAction(Feeder_ON.action,null);
+    // eraWidget.triggerAction(RequestOTA.action,null);
 
   } else {
     icon.classList.remove("active");
     eraWidget.triggerAction(Light_OFF.action,null);
-    eraWidget.triggerAction(SetAutoOFF.action,null);
-    eraWidget.triggerAction(Filter_OFF.action,null);
-    eraWidget.triggerAction(Pumb_OFF.action,null);
-    eraWidget.triggerAction(Fan_OFF.action,null);
-    eraWidget.triggerAction(Heater_OFF.action,null);
-    eraWidget.triggerAction(Feeder_OFF.action,null);
-    eraWidget.triggerAction(LoadingOTA.action,null);
+    // eraWidget.triggerAction(SetAutoOFF.action,null);
+    // eraWidget.triggerAction(Filter_OFF.action,null);
+    // eraWidget.triggerAction(Pumb_OFF.action,null);
+    // eraWidget.triggerAction(Fan_OFF.action,null);
+    // eraWidget.triggerAction(Heater_OFF.action,null);
+    // eraWidget.triggerAction(Feeder_OFF.action,null);
+    // eraWidget.triggerAction(LoadingOTA.action,null);
   }
 });
 
@@ -166,6 +166,7 @@ function requestAutoUpdate() {
   }
 }
 
+let TemperatureGauge = TemperatureValue;
 //Temperature Gauge
 let tempProgressBar = new ProgressBar.SemiCircle("#container_temperature", {
   strokeWidth: 12,
@@ -193,7 +194,7 @@ let tempProgressBar = new ProgressBar.SemiCircle("#container_temperature", {
     bar.text.style.color = state.color;
   },
 });
-tempProgressBar.animate(TemperatureValue / 100); // Number from 0.0 to 1.0
+tempProgressBar.animate(TemperatureGauge / 100); // Number from 0.0 to 1.0
 
 //Water Level Bar
 let waterProgressBar = new ProgressBar.Line("#container_waterlevel", {
