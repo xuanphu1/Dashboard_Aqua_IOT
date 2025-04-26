@@ -47,6 +47,8 @@ const updateUI = () => {
   DOM.pumpSwitch.checked = statusProxy.StatusPump;
   DOM.filterSwitch.checked = statusProxy.StatusFilter;
   DOM.feederSwitch.checked = statusProxy.StatusFeeder;
+  DOM.autoBtn.checked = statusProxy.StatusAuto;
+  DOM.fotaBtn.checked = statusProxy.StatusOTA;
   isUpdatingUI = false; // Kết thúc cập nhật UI
 };
 
@@ -148,13 +150,6 @@ const initEventListeners = () => {
     }
   });
 
-  // DOM.lightSwitch.addEventListener('change', () => {
-  //   isUpdatingUI = true; // Bắt đầu cập nhật UI
-  //   console.log('Light switch:', DOM.lightSwitch.checked);
-  //   statusProxy.StatusLight = DOM.lightSwitch.checked;
-  //   DOM.lightIcon.classList.toggle('active', statusProxy.StatusLight);
-  // });
-
   // Fan
   DOM.fanStatus.addEventListener('click', () => {
     isUpdatingUI = true; // Bắt đầu cập nhật UI
@@ -166,11 +161,6 @@ const initEventListeners = () => {
     }
   });
 
-  // DOM.fanSwitch.addEventListener('change', () => {
-  //   isUpdatingUI = true; // Bắt đầu cập nhật UI
-  //   console.log('Fan switch:', DOM.fanSwitch.checked);
-  //   statusProxy.StatusFan = DOM.fanSwitch.checked;
-  // });
 
   // Heater
   DOM.heaterStatus.addEventListener('click', () => {
@@ -183,12 +173,6 @@ const initEventListeners = () => {
     }
   });
 
-  // DOM.heaterSwitch.addEventListener('change', () => {
-  //   isUpdatingUI = true; // Bắt đầu cập nhật UI
-  //   console.log('Heater switch:', DOM.heaterSwitch.checked);
-  //   statusProxy.StatusHeater = DOM.heaterSwitch.checked;
-  // });
-
   // Pump
   DOM.pumpStatus.addEventListener('click', () => {
     isUpdatingUI = true; // Bắt đầu cập nhật UI
@@ -200,11 +184,6 @@ const initEventListeners = () => {
     }
   });
 
-  // DOM.pumpSwitch.addEventListener('change', () => {
-  //   isUpdatingUI = true; // Bắt đầu cập nhật UI
-  //   console.log('Pump switch:', DOM.pumpSwitch.checked);
-  //   statusProxy.StatusPump = DOM.pumpSwitch.checked;
-  // });
 
   // Filter
   DOM.filterStatus.addEventListener('click', () => {
@@ -217,11 +196,6 @@ const initEventListeners = () => {
     }
   });
 
-  // DOM.filterSwitch.addEventListener('change', () => {
-  //   isUpdatingUI = true; // Bắt đầu cập nhật UI
-  //   console.log('Filter switch:', DOM.filterSwitch.checked);
-  //   statusProxy.StatusFilter = DOM.filterSwitch.checked;
-  // });
 
   // Feeder
   DOM.feederStatus.addEventListener('click', () => {
@@ -234,11 +208,6 @@ const initEventListeners = () => {
     }
   });
 
-  // DOM.feederSwitch.addEventListener('change', () => {
-  //   isUpdatingUI = true; // Bắt đầu cập nhật UI
-  //   console.log('Feeder switch:', DOM.feederSwitch.checked);
-  //   statusProxy.StatusFeeder = DOM.feederSwitch.checked;
-  // });
 
   // Auto mode
   DOM.autoBtn.addEventListener('click', () => {
@@ -251,11 +220,6 @@ const initEventListeners = () => {
     }
   });
 
-  // DOM.autoBtn.addEventListener('change', () => {
-  //   isUpdatingUI = true; // Bắt đầu cập nhật UI
-  //   console.log('Auto switch:', DOM.autoBtn.checked);
-  //   statusProxy.StatusAuto = DOM.autoBtn.checked;
-  // });
 
   // OTA
   DOM.fotaBtn.addEventListener('click', () => {
@@ -268,12 +232,6 @@ const initEventListeners = () => {
       eraWidget.triggerAction(RequestOTA.action, null);
     }
   });
-
-  // DOM.fotaBtn.addEventListener('change', () => {
-  //   isUpdatingUI = true; // Bắt đầu cập nhật UI
-  //   console.log('OTA switch:', DOM.fotaBtn.checked);
-  //   statusProxy.StatusOTA = DOM.fotaBtn.checked;
-  // });
 
 };
 
