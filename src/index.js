@@ -49,6 +49,9 @@ const updateUI = () => {
   DOM.feederSwitch.checked = statusProxy.StatusFeeder;
   DOM.autoBtn.checked = statusProxy.StatusAuto;
   DOM.fotaBtn.checked = statusProxy.StatusOTA;
+
+
+  
   isUpdatingUI = false; // Kết thúc cập nhật UI
 };
 
