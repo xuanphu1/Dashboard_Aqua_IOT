@@ -12,6 +12,8 @@ let configStatusFan, configStatusHeater, configStatusLight, configStatusFeeder, 
 let TemperatureValue = 50, WaterLevelValue, TDSValue, PHValue, ConductivityValue;
 
 // Proxy for Status Tracking
+let isUpdatingUI = false;
+
 const statusProxy = new Proxy({
   StatusFan: null,
   StatusHeater: null,
@@ -26,11 +28,27 @@ const statusProxy = new Proxy({
     if (target[key] !== value) {
       console.log(`${key} changed from ${target[key]} to ${value}`);
       target[key] = value;
-      updateUI();
+      if (!isUpdatingUI) {
+        updateUI();
+      }
     }
+    if (isUpdatingUI) isUpdatingUI = false;
     return true;
   }
 });
+
+
+// Update UI
+const updateUI = () => {
+  DOM.lightIcon.classList.toggle('active', statusProxy.StatusLight);
+  DOM.lightSwitch.checked = statusProxy.StatusLight;
+  DOM.fanSwitch.checked = statusProxy.StatusFan;
+  DOM.heaterSwitch.checked = statusProxy.StatusHeater;
+  DOM.pumpSwitch.checked = statusProxy.StatusPump;
+  DOM.filterSwitch.checked = statusProxy.StatusFilter;
+  DOM.feederSwitch.checked = statusProxy.StatusFeeder;
+  isUpdatingUI = false; // Kết thúc cập nhật UI
+};
 
 // Initialize Era Widget
 const initEraWidget = () => {
@@ -113,21 +131,13 @@ const DOM = {
   fotaBtn: document.querySelector('#fota-btn')
 };
 
-// Update UI
-const updateUI = () => {
-  DOM.lightIcon.classList.toggle('active', statusProxy.StatusLight);
-  DOM.lightSwitch.checked = statusProxy.StatusLight;
-  DOM.fanSwitch.checked = statusProxy.StatusFan;
-  DOM.heaterSwitch.checked = statusProxy.StatusHeater;
-  DOM.pumpSwitch.checked = statusProxy.StatusPump;
-  DOM.filterSwitch.checked = statusProxy.StatusFilter;
-  DOM.feederSwitch.checked = statusProxy.StatusFeeder;
-};
+
 
 // Event Listeners
 const initEventListeners = () => {
   // Light
   DOM.lightStatus.addEventListener('click', () => {
+    isUpdatingUI = true; // Bắt đầu cập nhật UI
     statusProxy.StatusLight = !statusProxy.StatusLight;
     if (statusProxy.StatusLight) {
       DOM.lightIcon.classList.add('active');
@@ -146,6 +156,7 @@ const initEventListeners = () => {
 
   // Fan
   DOM.fanStatus.addEventListener('click', () => {
+    isUpdatingUI = true; // Bắt đầu cập nhật UI
     statusProxy.StatusFan = !statusProxy.StatusFan;
     if (statusProxy.StatusFan) {
       eraWidget.triggerAction(Fan_ON.action, null);
@@ -161,6 +172,7 @@ const initEventListeners = () => {
 
   // Heater
   DOM.heaterStatus.addEventListener('click', () => {
+    isUpdatingUI = true; // Bắt đầu cập nhật UI
     statusProxy.StatusHeater = !statusProxy.StatusHeater;
     if (statusProxy.StatusHeater) {
       eraWidget.triggerAction(Heater_ON.action, null);
@@ -176,6 +188,7 @@ const initEventListeners = () => {
 
   // Pump
   DOM.pumpStatus.addEventListener('click', () => {
+    isUpdatingUI = true; // Bắt đầu cập nhật UI
     statusProxy.StatusPump = !statusProxy.StatusPump;
     if (statusProxy.StatusPump) {
       eraWidget.triggerAction(Pumb_ON.action, null);
@@ -191,6 +204,7 @@ const initEventListeners = () => {
 
   // Filter
   DOM.filterStatus.addEventListener('click', () => {
+    isUpdatingUI = true; // Bắt đầu cập nhật UI
     statusProxy.StatusFilter = !statusProxy.StatusFilter;
     if (statusProxy.StatusFilter) {
       eraWidget.triggerAction(Filter_ON.action, null);
@@ -206,6 +220,7 @@ const initEventListeners = () => {
 
   // Feeder
   DOM.feederStatus.addEventListener('click', () => {
+    isUpdatingUI = true; // Bắt đầu cập nhật UI
     statusProxy.StatusFeeder = !statusProxy.StatusFeeder;
     if (statusProxy.StatusFeeder) {
       eraWidget.triggerAction(Feeder_ON.action, null);
@@ -221,6 +236,7 @@ const initEventListeners = () => {
 
   // Auto mode
   DOM.autoBtn.addEventListener('click', () => {
+    isUpdatingUI = true; // Bắt đầu cập nhật UI
     statusProxy.StatusAuto = !statusProxy.StatusAuto;
     if (statusProxy.StatusAuto) {
       eraWidget.triggerAction(SetAutoON.action, null);
@@ -236,6 +252,7 @@ const initEventListeners = () => {
 
   // OTA
   DOM.fotaBtn.addEventListener('click', () => {
+    isUpdatingUI = true; // Bắt đầu cập nhật UI
     statusProxy.StatusOTA = !statusProxy.StatusOTA;
     if (statusProxy.StatusOTA) {
       eraWidget.triggerAction(LoadingOTA.action, null);
