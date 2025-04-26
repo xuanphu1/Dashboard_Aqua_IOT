@@ -122,8 +122,6 @@ const updateUI = () => {
   DOM.pumpSwitch.checked = statusProxy.StatusPump;
   DOM.filterSwitch.checked = statusProxy.StatusFilter;
   DOM.feederSwitch.checked = statusProxy.StatusFeeder;
-  DOM.autoBtn.checked = statusProxy.StatusAuto;
-  DOM.fotaBtn.checked = statusProxy.StatusOTA === 255 || statusProxy.StatusOTA === 254;
 };
 
 // Event Listeners
@@ -224,7 +222,6 @@ const initEventListeners = () => {
   // Auto mode
   DOM.autoBtn.addEventListener('click', () => {
     statusProxy.StatusAuto = !statusProxy.StatusAuto;
-    console.log('Auto mode:', statusProxy.StatusAuto);
     if (statusProxy.StatusAuto) {
       eraWidget.triggerAction(SetAutoON.action, null);
     } else {
@@ -232,16 +229,27 @@ const initEventListeners = () => {
     }
   });
 
+  DOM.autoBtn.addEventListener('change', () => {
+    console.log('Auto switch:', DOM.autoBtn.checked);
+    statusProxy.StatusAuto = DOM.autoBtn.checked;
+  });
+
   // OTA
   DOM.fotaBtn.addEventListener('click', () => {
-    statusProxy.StatusOTA = statusProxy.StatusOTA === 255 ? 254 : 255;
-    console.log('OTA status:', statusProxy.StatusOTA);
-    if (statusProxy.StatusOTA === 255) {
+    statusProxy.StatusOTA = !statusProxy.StatusOTA;
+    if (statusProxy.StatusOTA) {
       eraWidget.triggerAction(LoadingOTA.action, null);
-    } else if (statusProxy.StatusOTA === 254) {
+    } else 
+    {
       eraWidget.triggerAction(RequestOTA.action, null);
     }
   });
+
+  DOM.fotaBtn.addEventListener('change', () => {
+    console.log('OTA switch:', DOM.fotaBtn.checked);
+    statusProxy.StatusOTA = DOM.fotaBtn.checked;
+  });
+
 };
 
 
