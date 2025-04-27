@@ -445,8 +445,8 @@ const fetchWeather = async (location) => {
 
     // Cập nhật các phần tử trong DOM
     document.getElementById("location").textContent = `Weather in ${data.location.name}, ${data.location.country}: `;
-    document.getElementById("temperature").textContent = `🌡️ ${data.current.temp_c}°C`;
-    document.getElementById("wind").textContent = `💨 ${data.current.wind_kph} km/h`;
+    document.getElementById("temperature").textContent = `${data.current.temp_c}°C`;
+    document.getElementById("wind").textContent = `${data.current.wind_kph} km/h`;
   } catch (error) {
     console.log('❌ Error fetching data:', error.message);
   }

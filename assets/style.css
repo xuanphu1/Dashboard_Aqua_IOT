@@ -154,7 +154,12 @@ Widget-Specific Styles
 }
 
 
+.weather-icon
+{
+  width: 60px; /* Hoặc lớn hơn nếu cần */
+  height: 60px;
 
+}
 .iconFeeder,
 .iconFilter,
 .iconPumb,
@@ -170,6 +175,24 @@ Widget-Specific Styles
   margin-top: 35px; /* Đẩy xuống nhiều hơn */
 }
 
+
+#wind-icon{
+  margin-left: -5px; /* Tăng khoảng cách giữa hình ảnh và văn bản */
+  margin-right: -5px; /* Tăng khoảng cách giữa hình ảnh và văn bản */
+  width: 120px;
+  height: 70px;
+} 
+
+#temperature-icon
+{
+  margin-left: -10px; /* Tăng khoảng cách giữa hình ảnh và văn bản */
+  margin-right: -10px; /* Tăng khoảng cách giữa hình ảnh và văn bản */
+  width: 90px;
+  height: 80px;
+}
+
+
+.weather-icon img,
 .iconFeeder img,
 .iconFilter img,
 .iconPumb img,
@@ -596,21 +619,19 @@ svg {
 
 
 
-
-
 #weather-container {
   display: flex;
   align-items: center;
   font-weight: 20px;
   gap: 5px;
   font-size: 24px;
-  transform: translateX(100px); /* Dịch sang trái 10px */
+  transform: translateX(60px); /* Dịch sang trái 10px */
 }
 
 
-.weather-icon {
+/* .weather-icon {
   font-size: 24px;
-}
+} */
 
 
 
