@@ -163,22 +163,25 @@ body {
 /* ==========================================================================
       Widget-Specific Styles
       ========================================================================== */
-.widget.Pumb-widget,
-.widget.Filter-widget,
-.widget.abc-widget {
-  max-height: 350px;
+.widget.Light-widget {
+  height: 290px;
+}
+
+.widget.Fan-widget {
+  height: 250px;
+}
+
+.widget.Heater-widget {
+  height: 253px;
 }
 
 .widget.Pumb-widget,
-.widget.Filter-widget,
-.widget.abc-widget {
+.widget.Filter-widget {
   max-height: 250px;
 }
 
-.widget.Light-widget,
-.widget.Fan-widget,
-.widget.Heater-widget {
-  min-height: 250px;
+.widget.Feeder-widget {
+  height: 258.3px;
 }
 
 .airConditioner,
@@ -198,7 +201,7 @@ body {
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 4px;
-  margin-left: 15px;
+  text-align: center;
   white-space: nowrap;
 }
 
@@ -207,16 +210,12 @@ body {
   width: 32px;
   height: 32px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ff2d55;
 }
 
 .iconLight img {
-  width: 100px;
-  height: 100px;
-  padding-left: 8px;
-  padding-top: 40px;
+  width: 120px;
+  height: 120px;
+  margin-left: 48px;
 }
 
 .iconFan {
@@ -224,15 +223,13 @@ body {
   height: 32px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: #ff2d55;
 }
 
 .iconFan img {
-  width: 100px;
-  height: 100px;
-  padding-left: 8px;
-  padding-top: 40px;
+  width: 120px;
+  height: 120px;
+  margin-top: 150px;
+  margin-left: 43px;
 }
 
 .iconHeater {
@@ -240,15 +237,13 @@ body {
   height: 32px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: #ff2d55;
 }
 
 .iconHeater img {
-  width: 100px;
-  height: 100px;
-  padding-left: 8px;
-  padding-top: 40px;
+  width: 120px;
+  height: 120px;
+  margin-top: 150px;
+  margin-left: 43px;
 }
 
 .iconPumb {
@@ -256,15 +251,13 @@ body {
   height: 32px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: #ff2d55;
 }
 
 .iconPumb img {
-  width: 100px;
-  height: 100px;
-  padding-left: 8px;
-  padding-top: 40px;
+  width: 120px;
+  height: 120px;
+  margin-top: 150px;
+  margin-left: 43px;
 }
 
 .iconFilter {
@@ -272,15 +265,13 @@ body {
   height: 32px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: #ff2d55;
 }
 
 .iconFilter img {
-  width: 100px;
-  height: 100px;
-  padding-left: 8px;
-  padding-top: 40px;
+  width: 120px;
+  height: 120px;
+  margin-top: 150px;
+  margin-left: 43px;
 }
 
 
@@ -289,20 +280,13 @@ body {
   height: 32px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: #ff2d55;
 }
 
 .iconFeeder img {
-  width: 100px;
-  height: 100px;
-  padding-left: 8px;
-  padding-top: 40px;
-}
-
-.iconWeather img {
-  width: 170px;
-  height: 170px;
+  width: 120px;
+  height: 120px;
+  margin-top: 150px;
+  margin-left: 38px;
 }
 
 /* Light Widget */
@@ -342,14 +326,11 @@ body {
   transition: all 0.3s ease;
 }
 
-
-
 .Fan-effect {
   width: 80px;
   height: 80px;
   display: flex;
   align-items: center;
-  justify-content: center;
   transition: all 0.3s ease;
   padding: 15px;
   border-radius: 50%;
@@ -761,9 +742,9 @@ label {
   cursor: pointer;
   text-indent: -9999px;
   width: 85px;
-  height: 39px;
+  height: 38px;
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.3); /* 🔥 Viền trắng mờ */
+  border: 1px solid rgba(255, 255, 255, 0.3);
   display: block;
   border-radius: 100px;
   position: relative;
@@ -771,13 +752,16 @@ label {
   box-shadow: none;
 }
 
-.s {
+.s,
+.s-light,
+.s-feeder {
   position: absolute;
   left: 66px;
   width: 35px;
   height: 35px;
   background: transparent;
   border-radius: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
   transition: 0.5s ease-in-out;
   transform-origin: 50% 50%;
   pointer-events: none;
@@ -788,10 +772,11 @@ input:checked+label {
 }
 
 input:checked~.s {
-  transform: translateX(44px);
+  transform: translateX(43px);
   background: transparent;
   border: 2px solid rgba(0, 200, 0, 0.8);
-  border-radius: 50%; /* 🔥 THÊM DÒNG NÀY để luôn bo tròn */
+  border-radius: 50%;
+  /* 🔥 THÊM DÒNG NÀY để luôn bo tròn */
 }
 
 .s-auto {
@@ -807,37 +792,49 @@ input:checked~.s {
 }
 
 input:checked~.s-auto {
-  transform: translateX(31px);
+  transform: translateX(27px);
   background: transparent;
   border: 2px solid rgba(0, 200, 0, 0.8);
   border-radius: 50%;
 }
 
-/* Switch Animation */
-.switch__input:checked~.switch__surface .switch__surface-glare {
-  transform: translate(3em, 0.125em);
+input:checked~.s-light {
+  transform: translateX(47px);
+  background: transparent;
+  border: 2px solid rgba(0, 200, 0, 0.8);
+  border-radius: 50%;
 }
 
-.switch__input:checked~.switch__inner {
-  transform: translate(-0.125em, 0);
+input:checked~.s-feeder {
+  transform: translateX(44px);
+  background: transparent;
+  border: 2px solid rgba(0, 200, 0, 0.8);
+  border-radius: 50%;
 }
 
-.switch__input:checked~.switch__inner .switch__inner-glare {
-  transform: translate(0, -0.5em);
-}
+@media screen and (min-width: 1440px) {
 
-.switch__input:checked~.switch__rocker {
-  transform: rotateY(20deg) translateZ(0.5em);
+  input:checked ~ .s {
+    transform: translateX(46px);
+  }
+  input:checked ~ .s-light {
+    transform: translateX(50px);
+  }
+  input:checked ~ .s-feeder {
+    transform: translateX(45px);
+  }
+  input:checked ~ .s-auto {
+    transform: translateX(36px);
+  }
 }
-
 
 /* ==========================================================================
 Fullscreen Feature
 ========================================================================== */
 .fullscreen-button {
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: 0px;
+  right: 0px;
   z-index: 9999;
   background-color: rgba(0, 0, 0, 0.5);
   border: none;
@@ -860,29 +857,9 @@ Fullscreen Feature
   font-size: 18px;
 }
 
-:fullscreen .fullscreen-button {
-  top: 30px;
-  right: 30px;
-}
-
-:-webkit-full-screen .fullscreen-button {
-  top: 30px;
-  right: 30px;
-}
-
-:-moz-full-screen .fullscreen-button {
-  top: 30px;
-  right: 30px;
-}
-
-:-ms-fullscreen .fullscreen-button {
-  top: 30px;
-  right: 30px;
-}
-
 /* ==========================================================================
-      Animations
-      ========================================================================== */
+    Animations
+========================================================================== */
 @keyframes glow {
   from {
     box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ffd700, 0 0 20px #ffd700, inset 0 0 10px rgba(255, 215, 0, 0.3);
@@ -991,4 +968,3 @@ Fullscreen Feature
     opacity: 0.8;
   }
 }
-
