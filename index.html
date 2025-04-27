@@ -20,172 +20,187 @@
         <div>
           <a class="active" href="#"> HOME </a>
           <div id="weather-container">
+            <div class="weather-icon">🌍</div>
+            <p id="location"></p>
+            <p id="temperature">🌡️</p>
+            <p id="wind">💨</p>
           </div>
         </div>
+
         <div>
-          <div class="btn" style="margin-right: 20px; margin-left: 0px;">
-            <div>Auto mode:</div>
+          <div class="btn-auto">
+            <div class="label-text">Auto mode:</div>
             <input type="checkbox" id="auto-btn" />
-            <label for="auto-btn" style="width: 60px; height: 28px;">
+            <label for="auto-btn">
+              <div class="s"></div>
             </label>
-            <div class="s-auto" style="margin-left: 1100px; border-radius: 50%;"></div>
           </div>
-          <div class="btn">
-            <div>FOTA:</div>
+      
+          <div class="btn-ota">
+            <div class="label-text">FOTA:</div>
             <input type="checkbox" id="fota-btn" />
-            <label for="fota-btn" style="width: 60px; height: 28px; border-radius: 100px;">
+            <label for="fota-btn">
+              <div class="s"></div>
             </label>
-            <div class="s-auto" style="margin-left: 1235px;  border-radius: 50%;"></div>
           </div>
-        </div>
-      </div>
-
-
-      <div class="widgets">
-        <div class="widget Light-widget">
-          <div class="widget-title">Light</div>
-          <div class="iconLight">
-            <img src="assets/imgs/3dKitchenLight.png" alt="imgBedLights" style="margin-top: 30px;" />
-          </div>
-
-          <div id="switch">
-            <input type="checkbox" id="light-switch" />
-            <label for="light-switch" class="status" style="margin-top: 250px;">
-            </label>
-            <div class="s-light" style="margin-top: 250px;"></div>
-          </div>
-          <div class="Light-effect"></div>
-        </div>
-
-
-        <div class="widget Fan-widget">
-          <div class="widget-title">Fan</div>
-          <div class="iconFan">
-            <img src="assets/imgs/istockphoto-170640706-612x612-removebg-preview.png" alt="icon" />
-          </div>
-
-          <div id="switch">
-            <input type="checkbox" id="fan-switch" />
-            <label for="fan-switch" class="status" style="margin-top: 250px;"></label>
-            <div class="s" style="margin-top: 250px;"></div>
-          </div>
-          <div class="Fan-effect"></div>
-        </div>
-
-
-        <div class="widget Heater-widget" style="padding: 19px;">
-          <div class="widget-title">Heater</div>
-          <div class="iconHeater">
-            <img src="assets/imgs/heater-3d-model-obj-fbx-ma-removebg-preview.png" alt="icon" />
-          </div>
-
-          <div id="switch">
-            <input type="checkbox" id="heater-switch" />
-            <label for="heater-switch" class="status" style="margin-top: 250px;"></label>
-            <div class="s" style="margin-top: 250px;"></div>
-          </div>
-          <div class="Heater-effect"></div> <!-- thêm dòng này -->
-        </div>
-
-
-        <div class="widget Pumb-widget">
-          <div class="widget-title">Pumb</div>
-          <div class="iconPumb">
-            <img src="assets/imgs/tceb71rc-removebg-preview.png" alt="icon" />
-          </div>
-
-          <div id="switch">
-            <input type="checkbox" id="pumb-switch" />
-            <label for="pumb-switch" class="status" style="margin-top: 240px;"></label>
-            <div class="s" style="margin-top: 240px;"></div>
-          </div>
-          <div class="Pumb-effect"></div> <!-- thêm dòng này -->
-        </div>
-
-
-        <div class="widget Filter-widget">
-          <div class="widget-title">Filter</div>
-          <div class="iconFilter">
-            <img src="assets/imgs/pngtree-3d-water-filter-images-png-image_13286731-removebg-preview.png" alt="icon" />
-          </div>
-
-          <div id="switch">
-            <input type="checkbox" id="filter-switch" />
-            <label for="filter-switch" class="status" style="margin-top: 240px;"></label>
-            <div class="s" style="margin-top: 240px;"></div>
-          </div>
-          <div class="Filter-effect"></div> <!-- thêm dòng này -->
-        </div>
-
-
-        <div class="widget Feeder-widget">
-          <div class="widget-title">Feeder</div>
-          <div class="iconFeeder">
-            <img src="assets/imgs/solar-cell-powered-directional-fish-feeder-centrifugal-sprea-02-removebg-preview.png"
-              alt="icon" />
-          </div>
-
-          <div id="switch">
-            <input type="checkbox" id="feeder-switch" />
-            <label for="feeder-switch" class="status" style="margin-top: 248px;"></label>
-            <div class="s-feeder" style="margin-top: 248px; left: 69px;"></div>
-          </div>
-          <div class="Feeder-effect"></div>
-        </div>
-
-        <!-- Data Widget -->
-        <div class="widget data-widget">
-          <div class="title-dataWidget">Data Monitor</div>
-          <div class="subtitle-dataWidget">Real-time Data</div>
-
-          <div class="Row_1_dataWidget">
-            <div class="card card_temperature">
-              <div class="label" style="margin-top: 3px;"><i class="fas fa-thermometer-half"
-                  style="font-size: 20px; margin-right: 8px;"></i>Temperature
-              </div>
-              <div id="container_temperature" style="stroke: #fafafabd;"></div>
-            </div>
-
-            <div class="card card_waterlevel">
-              <div class="label" style="margin-top: 3px"><i class="fas fa-water"
-                  style="font-size: 20px; margin-right: 10px;"></i>Water Level</div>
-              <div id="container_waterlevel" style="stroke: #fafafabd;"></div>
-            </div>
-          </div>
-
-          <div class="Row_2_dataWidget">
-            <div class="card card_tds">
-              <div class="label" style="margin-top: 3px"><i class="fas fa-flask"
-                  style="font-size: 30px; margin-right: 8px;"></i>TDS</div>
-              <div id="container_tds" style="stroke: #fafafabd;"></div>
-            </div>
-
-            <div class="card card_ph">
-              <div class="label" style="margin-top: 3px"><i class="fas fa-flask"
-                  style="font-size: 30px; margin-right: 8px;"></i>pH</div>
-              <div id="container_ph" style="stroke: #fafafabd;"></div>
-            </div>
-          </div>
-
-          <div class="Row_3_dataWidget">
-            <div class="card_final card_conductivity">
-              <div class="label" style="margin-top: 3px"><i class="fas fa-plug"
-                  style="font-size: 30px; margin-right: 8px;"></i>Conductivity</div>
-              <div id="container_conductivity" style="stroke: #fafafabd;"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Chart Widget -->
-        <div class="widget chart-container1">
-          <figure class="highcharts-figure">
-            <div id="chart-container"></div>
-          </figure>
-        </div>
-        <div class="widget stream-monitor">
         </div>
       </div>
     </div>
+
+
+    <div class="widgets">
+      <div class="widget Light-widget">
+        <div class="widget-title">Light</div>
+        <div class="iconLight">
+          <img src="assets/imgs/3dKitchenLight.png" />
+        </div>
+
+        <div id="switch">
+          <input type="checkbox" id="light-switch" />
+          <label for="light-switch" class="status">
+            <div class="s"></div>
+          </label>
+        </div>
+        <div class="Light-effect"></div>
+      </div>
+
+
+      <div class="widget Fan-widget">
+        <div class="widget-title">Fan</div>
+        <div class="iconFan">
+          <img src="assets/imgs/istockphoto-170640706-612x612-removebg-preview.png" alt="icon" />
+        </div>
+
+        <div id="switch">
+          <input type="checkbox" id="fan-switch" />
+          <label for="fan-switch" class="status">
+            <div class="s"></div>
+          </label>
+        </div>
+        <div class="Fan-effect"></div>
+      </div>
+
+
+      <div class="widget Heater-widget">
+        <div class="widget-title">Heater</div>
+        <div class="iconHeater">
+          <img src="assets/imgs/istockphoto-170640706-612x612-removebg-preview.png" alt="icon" />
+        </div>
+
+        <div id="switch">
+          <input type="checkbox" id="heater-switch" />
+          <label for="heater-switch" class="status">
+            <div class="s"></div>
+          </label>
+
+        </div>
+        <div class="Heater-effect"></div> <!-- thêm dòng này -->
+      </div>
+
+
+      <div class="widget Pumb-widget">
+        <div class="widget-title">Pumb</div>
+        <div class="iconPumb">
+          <img src="assets/imgs/istockphoto-170640706-612x612-removebg-preview.png" alt="icon" />
+        </div>
+
+        <div id="switch">
+          <input type="checkbox" id="pumb-switch" />
+          <label for="pumb-switch" class="status">
+            <div class="s"></div>
+          </label>
+
+        </div>
+        <div class="Pumb-effect"></div> <!-- thêm dòng này -->
+      </div>
+
+
+      <div class="widget Filter-widget">
+        <div class="widget-title">Filter</div>
+        <div class="iconFilter">
+          <img src="assets/imgs/pngtree-3d-water-filter-images-png-image_13286731-removebg-preview.png" alt="icon" />
+        </div>
+
+        <div id="switch">
+          <input type="checkbox" id="filter-switch" />
+          <label for="filter-switch" class="status">
+            <div class="s"></div>
+          </label>
+
+        </div>
+        <div class="Filter-effect"></div> <!-- thêm dòng này -->
+      </div>
+
+
+      <div class="widget Feeder-widget">
+        <div class="widget-title">Feeder</div>
+        <div class="iconFeeder">
+          <img src="assets/imgs/istockphoto-170640706-612x612-removebg-preview.png" alt="icon" />
+        </div>
+
+        <div id="switch">
+          <input type="checkbox" id="feeder-switch" />
+          <label for="feeder-switch" class="status">
+            <div class="s"></div>
+          </label>
+
+        </div>
+        <div class="Feeder-effect"></div>
+      </div>
+
+      <!-- Data Widget -->
+      <div class="widget data-widget">
+        <div class="title-dataWidget">Data Monitor</div>
+        <div class="subtitle-dataWidget">Real-time Data</div>
+
+        <div class="Row_1_dataWidget">
+          <div class="card card_temperature">
+            <div class="label" style="margin-top: 3px;"><i class="fas fa-thermometer-half"
+                style="font-size: 20px; margin-right: 8px;"></i>Temperature
+            </div>
+            <div id="container_temperature" style="stroke: #fafafabd;"></div>
+          </div>
+
+          <div class="card card_waterlevel">
+            <div class="label" style="margin-top: 3px"><i class="fas fa-water"
+                style="font-size: 20px; margin-right: 10px;"></i>Water Level</div>
+            <div id="container_waterlevel" style="stroke: #fafafabd;"></div>
+          </div>
+        </div>
+
+        <div class="Row_2_dataWidget">
+          <div class="card card_tds">
+            <div class="label" style="margin-top: 3px"><i class="fas fa-flask"
+                style="font-size: 30px; margin-right: 8px;"></i>TDS</div>
+            <div id="container_tds" style="stroke: #fafafabd;"></div>
+          </div>
+
+          <div class="card card_ph">
+            <div class="label" style="margin-top: 3px"><i class="fas fa-flask"
+                style="font-size: 30px; margin-right: 8px;"></i>pH</div>
+            <div id="container_ph" style="stroke: #fafafabd;"></div>
+          </div>
+        </div>
+
+        <div class="Row_3_dataWidget">
+          <div class="card_final card_conductivity">
+            <div class="label" style="margin-top: 3px"><i class="fas fa-plug"
+                style="font-size: 30px; margin-right: 8px;"></i>Conductivity</div>
+            <div id="container_conductivity" style="stroke: #fafafabd;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart Widget -->
+      <div class="widget chart-container1">
+        <figure class="highcharts-figure">
+          <div id="chart-container"></div>
+        </figure>
+      </div>
+      <div class="widget stream-monitor">
+      </div>
+    </div>
+  </div>
   </div>
   </div>
   </div>

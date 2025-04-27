@@ -25,24 +25,8 @@ body {
 }
 
 /* ==========================================================================
-      Container Styles
-      ========================================================================== */
-.container {
-  display: flex;
-  min-height: 100vh;
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(10px);
-  position: relative;
-}
-
-.container>* {
-  position: relative;
-  z-index: 2;
-}
-
-/* ==========================================================================
-      Main Content and Navigation
-      ========================================================================== */
+Main Content and Navigation
+========================================================================== */
 .main-content {
   flex: 1;
   padding: 24px;
@@ -98,27 +82,10 @@ body {
   font-weight: bold;
 }
 
-#weather-container {
-  display: flex;
-  align-items: center;
-  font-size: 1rem;
-  color: #fff;
-  justify-content: center;
-}
-
-#weather-container p {
-  margin-left: 10px;
-}
-
-.weather-icon {
-  font-size: 1.2rem;
-  margin-left: 300px;
-  margin-bottom: 3px;
-}
 
 /* ==========================================================================
-      Widgets Grid
-      ========================================================================== */
+Widgets Grid
+========================================================================== */
 .widgets {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -161,143 +128,60 @@ body {
 }
 
 /* ==========================================================================
-      Widget-Specific Styles
-      ========================================================================== */
-.widget.Light-widget {
-  height: 290px;
-}
-
-.widget.Fan-widget {
-  height: 250px;
-}
-
-.widget.Heater-widget {
-  height: 253px;
-}
-
-.widget.Pumb-widget,
-.widget.Filter-widget {
-  max-height: 250px;
-}
-
-.widget.Feeder-widget {
-  height: 258.3px;
-}
-
-.airConditioner,
-.Heater-widget {
-  width: 83%;
-}
-
-.title {
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 500;
-  margin-bottom: 10px;
-}
-
-.widget-title {
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 500;
-  margin-bottom: 4px;
-  text-align: center;
-  white-space: nowrap;
-}
+Widget-Specific Styles
+========================================================================== */
 
 
-.iconLight {
-  width: 32px;
-  height: 32px;
-  display: flex;
-}
 
-.iconLight img {
-  width: 120px;
-  height: 120px;
-  margin-left: 48px;
-}
-
-.iconFan {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-}
-
-.iconFan img {
-  width: 120px;
-  height: 120px;
-  margin-top: 150px;
-  margin-left: 43px;
-}
-
-.iconHeater {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-}
-
-.iconHeater img {
-  width: 120px;
-  height: 120px;
-  margin-top: 150px;
-  margin-left: 43px;
-}
-
-.iconPumb {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-}
-
-.iconPumb img {
-  width: 120px;
-  height: 120px;
-  margin-top: 150px;
-  margin-left: 43px;
-}
-
-.iconFilter {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-}
-
-.iconFilter img {
-  width: 120px;
-  height: 120px;
-  margin-top: 150px;
-  margin-left: 43px;
-}
-
-
-.iconFeeder {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-}
-
-.iconFeeder img {
-  width: 120px;
-  height: 120px;
-  margin-top: 150px;
-  margin-left: 38px;
-}
-
-/* Light Widget */
-.light-widget {
+/* Widget */
+.Feeder-widget,
+.Filter-widget,
+.Pumb-widget,
+.Heater-widget,
+.Fan-widget,
+.Light-widget {
+  max-height: 90.5%;
   background: rgba(28, 28, 30, 0.9);
   border-radius: 16px;
-  padding: 16px;
+  padding: 3%;
   width: 100%;
   max-width: 300px;
   box-sizing: border-box;
+  display: flex; /* Thêm thuộc tính này */
+  flex-direction: column; /* Xếp các phần tử theo cột */
+  align-items: center; /* Căn giữa theo chiều ngang */
+  justify-content: space-between; /* Đẩy các phần tử lên trên */
 }
+
+
+
+.iconFeeder,
+.iconFilter,
+.iconPumb,
+.iconHeater,
+.iconFan,
+.iconLight {
+  width: 120px; /* Hoặc lớn hơn nếu cần */
+  height: 120px;
+  display: flex;
+  justify-content: center; /* Căn giữa hình ảnh trong .iconLight */
+  align-items: center; /* Căn giữa hình ảnh trong .iconLight */
+  position: relative;
+  margin-top: 35px; /* Đẩy xuống nhiều hơn */
+}
+
+.iconFeeder img,
+.iconFilter img,
+.iconPumb img,
+.iconHeater img,
+.iconFan img,
+.iconLight img {
+  width: 100%;
+  height: auto;
+  margin: 0; /* Loại bỏ margin để căn giữa */
+}
+
+
 
 .Light-effect {
   width: 80px;
@@ -457,19 +341,20 @@ body {
 }
 
 
-
-/* Feeder Widget */
-.Feeder-widget {
-  background: linear-gradient(180deg, rgba(22, 24, 32, 0.7) 0%, rgba(32, 34, 42, 0.8) 100%);
-  border-radius: 16px;
-  padding: 16px;
-  color: white;
-  height: 258px;
-  width: 90%;
-  max-width: 210px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+.widget-title {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  text-align: center;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: bold;
 }
+
+
+
+
 
 /* Data Monitor Widget */
 .widget.data-widget {
@@ -707,6 +592,28 @@ svg {
   fill: white !important;
 }
 
+
+
+
+
+
+
+#weather-container {
+  display: flex;
+  align-items: center;
+  font-weight: 20px;
+  gap: 5px;
+  font-size: 24px;
+  transform: translateX(100px); /* Dịch sang trái 10px */
+}
+
+
+.weather-icon {
+  font-size: 24px;
+}
+
+
+
 /* Stream Monitor Widget */
 .stream-monitor {
   grid-column: 1 / 5;
@@ -727,7 +634,8 @@ svg {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px;
+  width: 100%;
+  height: 14.7%;
   position: relative;
 }
 
@@ -735,7 +643,9 @@ input[type="checkbox"] {
   height: 0;
   width: 0;
   visibility: hidden;
-  margin-top: 60px;
+  position: absolute; /* Đảm bảo input không chiếm không gian */
+  top: 0;
+  left: 0;
 }
 
 label {
@@ -747,86 +657,88 @@ label {
   border: 1px solid rgba(255, 255, 255, 0.3);
   display: block;
   border-radius: 100px;
-  position: relative;
+  position: absolute;
   transition: all 0.5s ease-in-out;
   box-shadow: none;
+  box-sizing: border-box;
+  margin: 0% auto; /* Căn giữa label trong #switch */
+  margin-bottom: -35%;
 }
 
-.s,
-.s-light,
-.s-feeder {
+.s {
   position: absolute;
-  left: 66px;
-  width: 35px;
-  height: 35px;
-  background: transparent;
-  border-radius: 2px solid rgba(255, 255, 255, 0.5);
+  top: 5%; 
+  left: 3%; /* Khít vào đầu bên trái */
+  width: 40%; /* Dựa trên chiều cao của label */
+  aspect-ratio: 1 / 1; /* Đảm bảo tỷ lệ 1:1 để tạo hình tròn */
+  background: rgba(255, 255, 255, 0.2); /* Thêm màu nền để làm nổi bật */
+  border: 2px solid rgba(255, 255, 255, 0.5);
   border-radius: 50%;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); /* Thêm bóng để tạo hiệu ứng lồng */
   transition: 0.5s ease-in-out;
   transform-origin: 50% 50%;
   pointer-events: none;
+  box-sizing: border-box;
+
 }
 
-input:checked+label {
+/* Khi input được chọn */
+input:checked ~ label .s {
+  transform: translateX(3%) ; /* Di chuyển .s sang bên phải của label */
+  background: rgba(0, 200, 0, 0.2);
+  border: 2px solid rgba(0, 200, 0, 0.8);
+  box-shadow: 0 0 5px rgba(0, 200, 0, 0.3);
+}
+
+input:checked + label {
   transform: rotate(180deg);
 }
 
-input:checked~.s {
-  transform: translateX(43px);
-  background: transparent;
-  border: 2px solid rgba(0, 200, 0, 0.8);
-  border-radius: 50%;
-  /* 🔥 THÊM DÒNG NÀY để luôn bo tròn */
+
+.btn-auto,
+.btn-ota {
+  display: flex;
+  /* color: var(--text-secondary); */
+  font-size: 20px;
+  font-weight: 1000;
+  position: relative;
 }
 
-.s-auto {
-  position: absolute;
-  left: 66px;
-  width: 25px;
-  height: 25px;
-  background: transparent;
-  border-radius: 2px solid rgba(255, 255, 255, 0.5);
-  transition: 0.5s ease-in-out;
-  transform-origin: 50% 50%;
-  pointer-events: none;
+.btn-auto {
+  transform: translateX(300px); /* Dịch sang trái 10px */
 }
 
-input:checked~.s-auto {
-  transform: translateX(27px);
-  background: transparent;
-  border: 2px solid rgba(0, 200, 0, 0.8);
-  border-radius: 50%;
+.btn-ota {
+  transform: translateX(150px); /* Dịch sang phải 10px */
 }
 
-input:checked~.s-light {
-  transform: translateX(47px);
-  background: transparent;
-  border: 2px solid rgba(0, 200, 0, 0.8);
-  border-radius: 50%;
+.btn-auto .label-text,
+.btn-ota  .label-text {
+  margin-top: 20px;
 }
 
-input:checked~.s-feeder {
-  transform: translateX(44px);
-  background: transparent;
-  border: 2px solid rgba(0, 200, 0, 0.8);
-  border-radius: 50%;
+
+
+/* Điều chỉnh vị trí chi tiết (tùy chọn) */
+.btn-auto {
+  left: -100%;  /* Dịch sang phải 5px */
+  top: -10px;  /* Dịch lên trên 2px */
+  right: 30px;
+}
+.btn-ota {
+  left: -50%; /* Dịch sang trái 5px */
+  bottom: 10px;   /* Dịch xuống dưới 2px */
 }
 
-@media screen and (min-width: 1440px) {
-
-  input:checked ~ .s {
-    transform: translateX(46px);
-  }
-  input:checked ~ .s-light {
-    transform: translateX(50px);
-  }
-  input:checked ~ .s-feeder {
-    transform: translateX(45px);
-  }
-  input:checked ~ .s-auto {
-    transform: translateX(36px);
-  }
+.btn-auto label,
+.btn-ota label {
+  display: block;
+  position: relative;
+  margin-left: 5px; /* Để tách chữ và công tắc */
+  margin-bottom: -20px; /* Để tách chữ và công tắc */
 }
+
+
 
 /* ==========================================================================
 Fullscreen Feature

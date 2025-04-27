@@ -131,12 +131,12 @@ const DOM = {
   filterEffect: document.querySelector('.Filter-effect'),
   feederEffect: document.querySelector('.Feeder-effect'),
 
-  lightStatus: document.querySelector('.light-widget .status'),
-  fanStatus: document.querySelector('.fan-widget .status'),
-  heaterStatus: document.querySelector('.heater-widget .status'),
-  pumpStatus: document.querySelector('.pumb-widget .status'),
-  filterStatus: document.querySelector('.filter-widget .status'),
-  feederStatus: document.querySelector('.feeder-widget .status'),
+  lightStatus: document.querySelector('.Light-widget .status'),
+  fanStatus: document.querySelector('.Fan-widget .status'),
+  heaterStatus: document.querySelector('.Heater-widget .status'),
+  pumpStatus: document.querySelector('.Pumb-widget .status'),
+  filterStatus: document.querySelector('.Filter-widget .status'),
+  feederStatus: document.querySelector('.Feeder-widget .status'),
 
   lightSwitch: document.querySelector('#light-switch'),
   fanSwitch: document.querySelector('#fan-switch'),
@@ -237,6 +237,7 @@ DOM.feederStatus.addEventListener('click', () => {
 
 
 
+
   // OTA
   DOM.fotaBtn.addEventListener('click', () => {
     isUpdatingUI = true; // Bắt đầu cập nhật UI
@@ -246,6 +247,18 @@ DOM.feederStatus.addEventListener('click', () => {
     } else 
     {
       eraWidget.triggerAction(RequestOTA.action, null);
+    }
+  });
+
+  // Auto
+  DOM.autoBtn.addEventListener('click', () => {
+    isUpdatingUI = true; // Bắt đầu cập nhật UI
+    statusProxy.StatusAuto = !statusProxy.StatusAuto;
+    if (statusProxy.StatusAuto) {
+      eraWidget.triggerAction(SetAutoON.action, null);
+    } else 
+    {
+      eraWidget.triggerAction(SetAutoOFF.action, null);
     }
   });
 
@@ -429,16 +442,16 @@ const fetchWeather = async (location) => {
     const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${location}&aqi=yes`);
     if (!response.ok) throw new Error(`${response.status}`);
     const data = await response.json();
-    DOM.weatherContainer.innerHTML = `
-      <div class="weather-icon">🌍</div>
-      <p>Weather in ${data.location.name}, ${data.location.country}: </p>
-      <p>🌡️ ${data.current.temp_c}°C</p>
-      <p>💨 ${data.current.wind_kph} km/h</p>
-    `;
+
+    // Cập nhật các phần tử trong DOM
+    document.getElementById("location").textContent = `Weather in ${data.location.name}, ${data.location.country}: `;
+    document.getElementById("temperature").textContent = `🌡️ ${data.current.temp_c}°C`;
+    document.getElementById("wind").textContent = `💨 ${data.current.wind_kph} km/h`;
   } catch (error) {
     console.log('❌ Error fetching data:', error.message);
   }
 };
+
 
 // Initialize Application
 const init = () => {
