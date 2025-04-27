@@ -19,7 +19,7 @@ body {
   color: var(--text-primary);
   min-height: 100vh;
   backdrop-filter: blur(20px);
-  background-image: url(imgs/deep_room.png);
+  background-image: url(imgs/must2.png);
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -762,12 +762,13 @@ label {
   text-indent: -9999px;
   width: 85px;
   height: 39px;
-  background: #114858;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3); /* 🔥 Viền trắng mờ */
   display: block;
   border-radius: 100px;
   position: relative;
   transition: all 0.5s ease-in-out;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: none;
 }
 
 .s {
@@ -775,8 +776,8 @@ label {
   left: 66px;
   width: 35px;
   height: 35px;
-  background: #cccccc;
-  border-radius: 90px;
+  background: transparent;
+  border-radius: 2px solid rgba(255, 255, 255, 0.5);
   transition: 0.5s ease-in-out;
   transform-origin: 50% 50%;
   pointer-events: none;
@@ -788,7 +789,9 @@ input:checked+label {
 
 input:checked~.s {
   transform: translateX(44px);
-  background: #00c801;
+  background: transparent;
+  border: 2px solid rgba(0, 200, 0, 0.8);
+  border-radius: 50%; /* 🔥 THÊM DÒNG NÀY để luôn bo tròn */
 }
 
 .s-auto {
@@ -796,8 +799,8 @@ input:checked~.s {
   left: 66px;
   width: 25px;
   height: 25px;
-  background: #cccccc;
-  border-radius: 90px;
+  background: transparent;
+  border-radius: 2px solid rgba(255, 255, 255, 0.5);
   transition: 0.5s ease-in-out;
   transform-origin: 50% 50%;
   pointer-events: none;
@@ -805,7 +808,9 @@ input:checked~.s {
 
 input:checked~.s-auto {
   transform: translateX(31px);
-  background: #00c801;
+  background: transparent;
+  border: 2px solid rgba(0, 200, 0, 0.8);
+  border-radius: 50%;
 }
 
 /* Switch Animation */
