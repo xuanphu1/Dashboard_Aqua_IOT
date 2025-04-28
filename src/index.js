@@ -56,6 +56,8 @@ const updateUI = () => {
   DOM.autoBtn.checked = statusProxy.StatusAuto;
   DOM.fotaBtn.checked = statusProxy.StatusOTA;
 
+  DOM.loadingIcon.style.display = statusProxy.StatusOTA ? "block" : "none";
+
   isUpdatingUI = false;
 };
 
@@ -146,7 +148,10 @@ const DOM = {
   feederSwitch: document.querySelector('#feeder-switch'),
 
   autoBtn: document.querySelector('#auto-btn'),
-  fotaBtn: document.querySelector('#fota-btn')
+  fotaBtn: document.querySelector('#fota-btn'),
+
+  loadingIcon: document.getElementById("Icon_Loading")
+
 };
 
 
@@ -239,13 +244,17 @@ DOM.feederStatus.addEventListener('click', () => {
 
 
   // OTA
+
+  //DOM.loadingIcon.style.display = "none";
   DOM.fotaBtn.addEventListener('click', () => {
     isUpdatingUI = true; // Bắt đầu cập nhật UI
     statusProxy.StatusOTA = !statusProxy.StatusOTA;
     if (statusProxy.StatusOTA) {
+      DOM.loadingIcon.style.display = "block";
       eraWidget.triggerAction(LoadingOTA.action, null);
     } else 
     {
+      DOM.loadingIcon.style.display = "none";
       eraWidget.triggerAction(RequestOTA.action, null);
     }
   });
